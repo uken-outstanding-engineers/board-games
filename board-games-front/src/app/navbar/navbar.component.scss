@@ -1,0 +1,80 @@
+mat-toolbar{
+    color: white;
+    background-color: #252525;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.nav-link {
+    color: white;
+    transition: color 0.3s ease-in;
+}
+  
+.nav-link:hover {
+    color: #f97316;
+    border-radius: 10px;
+}
+  
+.avatar,
+.sidebar-icon {
+    cursor: pointer;
+}
+
+:host ::ng-deep .p-menubar {
+    padding: 0rem;
+    background-color: #252525;
+    color: white;
+    border: 0px;
+    border-radius: 0px;
+}
+
+:host ::ng-deep .p-menubar .p-menuitem-link .p-menuitem-text {
+    color: white;
+}
+
+:host ::ng-deep .p-component {
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+:host ::ng-deep .p-submenu-list {
+    padding: 0.25rem 0;
+    background: #252525;
+    border: 1px solid #0b213f;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+    width: 100%;
+}
+
+:host ::ng-deep .p-menuitem-text {
+    min-width: 7rem;
+}
+
+:host ::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-text {
+    color: white;
+    font-family: Roboto, sans-serif;
+}
+
+:host ::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link .p-menuitem-text {
+    color: white;
+}
+
+:host ::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link:not(.p-disabled):hover .p-menuitem-text, 
+:host ::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover .p-menuitem-text,
+:host ::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover .p-menuitem-text, 
+:host ::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover .p-submenu-icon,
+:host ::ng-deep .p-menubar .p-menuitem.p-menuitem-active > .p-menuitem-link .p-menuitem-text {
+    color: rgb(255,255,255,0.8);
+}
+
+:host ::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-submenu-icon {
+    color: white;
+    margin-left: 0.5rem;
+}
+
+:host ::ng-deep .p-menubar .p-menuitem.p-menuitem-active > .p-menuitem-link {
+     background: #323232; 
+}

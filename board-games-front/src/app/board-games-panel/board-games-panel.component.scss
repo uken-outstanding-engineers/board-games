@@ -132,3 +132,11 @@
     transition: box-shadow 0.2s;
     border-radius: 3px;
 }
+
+:host ::ng-deep .mat-body p, 
+:host ::ng-deep .mat-body-2 p, 
+:host ::ng-deep .mat-typography .mat-body p, 
+:host ::ng-deep .mat-typography .mat-body-2 p, 
+:host ::ng-deep .mat-typography p {
+    margin: 0;
+}

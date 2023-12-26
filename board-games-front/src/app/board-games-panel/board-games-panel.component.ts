@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Games } from './games'; 
-import { GamesService } from './gamesservice';
-import { GAMES_DATA } from './games-data';
+import { Games } from './game'; 
+import { GamesService } from './game-service';
 import { Table } from 'primeng/table';
 
 @Component({
@@ -24,9 +23,6 @@ export class BoardGamesPanelComponent implements OnInit{
     selectedGames!: Games[] | null; 
 
     submitted: boolean = false;
-
-    //statuses!: any[];
-    //https: any;
 
     constructor(private GamesService: GamesService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
 
@@ -96,10 +92,30 @@ export class BoardGamesPanelComponent implements OnInit{
                 this.games[this.findIndexById(this.game.id)] = this.game; 
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Game Updated', life: 3000 }); 
             } else {
-                this.game.id = this.createId(); 
+                this.game.id = null; 
                 this.game.img = 'product-placeholder.svg'; 
-                this.games.push(this.game); 
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Game Created', life: 3000 }); 
+                
+                this.game.gametype1 = 1;
+                this.game.gametype2 = 1;
+                this.game.gametype3 = 1;
+                this.game.published = 2020;
+                this.game.max_players = 13;
+                this.game.age = 10; 
+                this.game.likes = 0;    
+                this.game.price = 0;
+                this.game.reference = "sdasad";
+
+                this.GamesService.addGame(this.game).subscribe(
+                    (data: any) => {
+                      console.log('Dodano nową grę:', data);
+                      this.games.push(data);
+                      this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Game Created', life: 3000 });
+                    },
+                    (error) => {
+                      console.error('Błąd podczas dodawania gry:', error);
+                      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to add game', life: 3000 });
+                    }
+                  );
             }
 
             this.games = [...this.games]; 
@@ -127,18 +143,5 @@ export class BoardGamesPanelComponent implements OnInit{
             id += chars.charAt(Math.floor(Math.random() * chars.length));
         }
         return id;
-    }
-
-    getSeverity(status: string) {
-        switch (status) {
-            case 'INSTOCK':
-                return 'success';
-            case 'LOWSTOCK':
-                return 'warning';
-            case 'OUTOFSTOCK':
-                return 'danger';
-            default:
-                return null
-        }
     }
 }

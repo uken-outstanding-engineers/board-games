@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Games } from './games';
-import { GAMES_DATA } from './games-data';
+//import { Games } from './games';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +18,9 @@ export class GamesService {
 
   getGames(): Observable<any> {
     return this.http.get(`${this.API_URL}/all`);
+  }
+
+  addGame(newGame: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/add`, newGame);
   }
 }

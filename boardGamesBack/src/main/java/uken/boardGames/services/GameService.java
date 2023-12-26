@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface GameService {
     List<Game> getGames();
+    Game saveGame(Game game);
 }

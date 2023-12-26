@@ -42,4 +42,8 @@ public class Game {
     private Integer gametype2;
     @Column(name = "gametype3")
     private Integer gametype3;
+
+    public Long getId() {
+        return id;
+    }
 }

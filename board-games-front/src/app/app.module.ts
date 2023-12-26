@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { FileUploadModule } from 'primeng/fileupload';
 import { MessageService } from 'primeng/api';
+import { TabViewModule } from 'primeng/tabview';
 
 import {CalendarModule} from 'primeng/calendar';
 import {SliderModule} from 'primeng/slider';
@@ -39,6 +40,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputNumberModule} from 'primeng/inputnumber';
 import { ConfirmationService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { GameDetailsComponent } from './game-details/game-details.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     LoginComponent,
     RegisterComponent,
     BoardGamesPanelComponent,
+    GameDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     HttpClientModule,
     ToastModule,
     FileUploadModule,
+    TabViewModule,
     CalendarModule, //start
     SliderModule,
     MultiSelectModule,

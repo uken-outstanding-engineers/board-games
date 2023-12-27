@@ -49,33 +49,55 @@ export class BoardGamesPanelComponent implements OnInit{
     }
 
     deleteSelectedGames() {
-        this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected games?', 
-            header: 'Confirm',
-            icon: 'pi pi-exclamation-triangle',
-            accept: () => {
-                this.games = this.games.filter((val) => !this.selectedGames?.includes(val)); 
-                this.selectedGames = null; 
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Games Deleted', life: 3000 }); 
-            }
-        });
+      this.confirmationService.confirm({
+        message: 'Are you sure you want to delete the selected games?', 
+        header: 'Confirm',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          if (this.selectedGames) {
+            this.selectedGames.forEach(game => {
+              if (game.id !== null && game.id !== undefined) {
+                this.GamesService.deleteGame(game.id).subscribe(
+                  () => {
+                    this.games = this.games.filter((val) => val.id !== game.id); 
+                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Games Deleted', life: 3000 }); 
+                  },
+                  (error: any) => {
+                    console.error('Error deleting game:', error);
+                  }
+                );
+              }
+            });
+            this.selectedGames = null; 
+          }
+        }
+      });
     }
-
+    
     editGame(game: Games) {
         this.game = { ...game }; 
         this.gameDialog = true; 
     }
 
     deleteGame(game: Games) {
+        const id = game.id ?? -1;
+        
         this.confirmationService.confirm({
             message: 'Are you sure you want to delete ' + game.title + '?', 
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.games = this.games.filter((val) => val.id !== game.id); 
-                this.game = {}; 
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Game Deleted', life: 3000 }); 
-            }
+                this.GamesService.deleteGame(id).subscribe(
+                  () => {
+                    this.games = this.games.filter((val) => val.id !== game.id);
+                    this.game = {};
+                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Game Deleted', life: 3000 });
+                  },
+                  (error: any) => {
+                    console.error('Error deleting game:', error);
+                  }
+                );
+              }
         });
     }
 
@@ -124,7 +146,7 @@ export class BoardGamesPanelComponent implements OnInit{
         }
     }
 
-    findIndexById(id: string): number {
+    findIndexById(id: number): number {
         let index = -1;
         for (let i = 0; i < this.games.length; i++) { 
             if (this.games[i].id === id) { 
@@ -134,14 +156,5 @@ export class BoardGamesPanelComponent implements OnInit{
         }
 
         return index;
-    }
-
-    createId(): string {
-        let id = '';
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (var i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
     }
 }

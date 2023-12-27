@@ -1,5 +1,5 @@
 export interface Games {
-    id?: string | null;
+    id?: number | null;
     title?: string;
     img?: string;
     short_description?: string;

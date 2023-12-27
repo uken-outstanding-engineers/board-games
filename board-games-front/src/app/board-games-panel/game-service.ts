@@ -23,4 +23,8 @@ export class GamesService {
   addGame(newGame: any): Observable<any> {
     return this.http.post(`${this.API_URL}/add`, newGame);
   }
+
+  deleteGame(gameId: number): Observable<any> {
+    return this.http.delete(`${this.API_URL}/delete/${gameId}`);
+  }
 }

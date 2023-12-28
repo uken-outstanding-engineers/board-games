@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Games } from './game'; 
-import { GamesService } from './game-service';
 import { Table } from 'primeng/table';
+import { Games } from '../api/game'; 
+import { GamesService } from '../api/game-service';
+import { Category } from '../api/category';
+import { CategoryService } from '../api/category-service';
 
 @Component({
   selector: 'app-board-games-panel',
@@ -20,19 +22,31 @@ export class BoardGamesPanelComponent implements OnInit{
 
     game!: Games; 
 
+    categories: Category[] = [];
+
     selectedGames!: Games[] | null; 
 
     submitted: boolean = false;
 
-    constructor(private GamesService: GamesService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
+    constructor(private GamesService: GamesService, private CategoryService: CategoryService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
 
     ngOnInit() {
+
         this.GamesService.getGames().subscribe(
           (data: Games[]) => {
             this.games = data;
           },
           (error) => {
             console.error('Wystąpił błąd podczas pobierania danych!', error);
+          }
+        );
+
+        this.CategoryService.getCategories().subscribe(
+          (data: Category[]) => {
+              this.categories = data;
+          },
+          (error) => {
+              console.error('Wystąpił błąd podczas pobierania kategorii!', error);
           }
         );
       }
@@ -110,20 +124,28 @@ export class BoardGamesPanelComponent implements OnInit{
         this.submitted = true;
 
         if (this.game.title?.trim()) {
-            if (this.game.id) {
-                this.games[this.findIndexById(this.game.id)] = this.game; 
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Game Updated', life: 3000 }); 
-            } else {
-                this.game.id = null; 
-                this.game.img = 'product-placeholder.svg'; 
+          if (this.game.id) { //edit game
+            this.games[this.findIndexById(this.game.id)] = this.game; 
+            this.GamesService.updateGame(this.game).subscribe(
+              (updatedGameData: any) => {
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Game Updated', life: 3000 });
+              },
+              (error: any) => {
+                console.error('Error updating game:', error);
+                this.messageService.add({ severity: 'error',summary: 'Error', detail: 'Failed to update game', life: 3000 });
+              }
+            );
+          }
+           else { //add game
+                this.game.likes = 0; 
                 
+                this.game.img = 'p1.jpg'; 
                 this.game.gametype1 = 1;
                 this.game.gametype2 = 1;
                 this.game.gametype3 = 1;
                 this.game.published = 2020;
                 this.game.max_players = 13;
-                this.game.age = 10; 
-                this.game.likes = 0;    
+                this.game.age = 10;   
                 this.game.price = 0;
                 this.game.reference = "sdasad";
 
@@ -131,6 +153,7 @@ export class BoardGamesPanelComponent implements OnInit{
                     (data: any) => {
                       console.log('Dodano nową grę:', data);
                       this.games.push(data);
+                      this.games = this.games.slice();
                       this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Game Created', life: 3000 });
                     },
                     (error) => {
@@ -145,6 +168,15 @@ export class BoardGamesPanelComponent implements OnInit{
             this.game = {}; 
         }
     }
+
+    getCategoryName(gametypeId: number): string {
+      const category = this.categories.find(category => category.id === gametypeId);
+      if (category && category.type) {
+        return category.type;
+      }
+      return '';
+    }
+    
 
     findIndexById(id: number): number {
         let index = -1;

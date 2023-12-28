@@ -22,6 +22,18 @@ public class GameController {
     @PostMapping("/add")
     public Game addGame(@RequestBody Game game) { return gameService.saveGame(game); }
 
+    @PutMapping("/edit/{id}")
+    public Game editGame(@PathVariable Long id, @RequestBody Game gameDetails) {
+        Game existingGame = gameService.findGameById(id);
+
+        if (existingGame != null) {
+            existingGame.setTitle(gameDetails.getTitle());
+            return gameService.saveGame(existingGame);
+        } else {
+            return null;
+        }
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteGame(@PathVariable Long id) {
         return gameService.deleteGameById(id);

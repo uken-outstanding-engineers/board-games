@@ -20,8 +20,22 @@ public class GameServiceImpl implements GameService {
 
     public Game saveGame(Game game) {return gameRepository.save(game);}
 
+    public Game editGame(Long id, Game updatedGameDetails) {
+        Game existingGame = gameRepository.findById(id).orElse(null);
+
+        if (existingGame != null) {
+            existingGame.setTitle(updatedGameDetails.getTitle());
+
+            return gameRepository.save(existingGame);
+        } else {
+            return null;
+        }
+    }
     public ResponseEntity<String> deleteGameById(Long id) {
         gameRepository.deleteById(id);
         return null;
+    }
+    public Game findGameById(Long id) {
+        return gameRepository.findById(id).orElse(null);
     }
 }

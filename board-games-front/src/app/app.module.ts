@@ -41,6 +41,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import { ConfirmationService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { GameDetailsComponent } from './game-details/game-details.component';
+import { BoardCategoryPanelComponent } from './board-category-panel/board-category-panel.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { GameDetailsComponent } from './game-details/game-details.component';
     RegisterComponent,
     BoardGamesPanelComponent,
     GameDetailsComponent,
+    BoardCategoryPanelComponent,
   ],
   imports: [
     BrowserModule,

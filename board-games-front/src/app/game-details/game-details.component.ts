@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Games } from '../board-games-panel//game'; 
-import { GamesService } from '../board-games-panel/game-service';
+import { Games } from '../api/game'; 
+import { GamesService } from '../api/game-service';
 import { Table } from 'primeng/table';
 
 

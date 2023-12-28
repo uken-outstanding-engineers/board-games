@@ -24,6 +24,7 @@
         [(selection)]="selectedGames"
         [rowHover]="true"
         dataKey="id"
+        
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [showCurrentPageReport]="true"
     >
@@ -60,7 +61,8 @@
                 <td>{{ game.title }}</td>
                 <td><img [src]="'assets/images/' + game.img" [alt]="game.title" width="50" class="shadow-4" /></td> <!--Src to img! -->
 
-                <td>{{ game.gametype1 }}</td>
+                <td>{{ getCategoryName(game.gametype1) }}</td>
+                <!-- <td>{{ game.gametype1 }}</td> -->
                 <td>{{ game.published }}</td>
                 <td>{{ game.max_players }}</td>
                 <td>{{ game.age }}</td>
@@ -94,41 +96,12 @@
             <textarea id="long_description" pInputTextarea [(ngModel)]="game.long_description" required rows="3" cols="20"></textarea>
         </div>
 
-        <div class="field">
-            <label class="mb-3">Category</label>
-            <div class="formgrid grid">
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="category1" name="category" value="Starożytyność" [(ngModel)]="game.gametype1"></p-radioButton>
-                    <label for="category1">Starożytyność</label>
-                </div>
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="category2" name="category" value="Strategie" [(ngModel)]="game.gametype1"></p-radioButton>
-                    <label for="category2">Strategie</label>
-                </div>
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="category3" name="category" value="Fantasy" [(ngModel)]="game.gametype1"></p-radioButton>
-                    <label for="category3">Fantasy</label>
-                </div>
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="category4" name="category" value="Wojenne" [(ngModel)]="game.gametype1"></p-radioButton>
-                    <label for="category4">Wojenne</label>
-                </div>
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="category5" name="category" value="Dla dzieci" [(ngModel)]="game.gametype1"></p-radioButton>
-                    <label for="category5">Dla dzieci</label>
-                </div>
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="category6" name="category" value="Na impreze" [(ngModel)]="game.gametype1"></p-radioButton>
-                    <label for="category6">Na impreze</label>
-                </div>
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="category7" name="category" value="Dla dorosłych (+18)" [(ngModel)]="game.gametype1"></p-radioButton>
-                    <label for="category7">Dla dorosłych (+18)</label>
-                </div>
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="category8" name="category" value="Since fiction" [(ngModel)]="game.gametype1"></p-radioButton>
-                    <label for="category8">Since fiction</label>
-                </div>
+        <div class="formgrid grid">
+            <div class="field-radiobutton col-6" *ngFor="let category of categories; let i = index">
+                <p-radioButton [id]="'category' + category.id" name="category" [value]="category.id" [(ngModel)]="game.gametype1"></p-radioButton>
+                <label [for]="'category' + category.id">{{ category.type }}</label>
+                
+                <div *ngIf="i % 2 === 1" class="clearfix"></div>
             </div>
         </div>
 

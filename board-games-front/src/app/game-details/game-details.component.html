@@ -1,111 +1,76 @@
 
 <div class="background" >
-    <!-- <p-image [src]="'assets/images/' + game.img" alt="Image" width="250" [preview]="true"></p-image> -->
-    
-      <div class="game-info">
-          <h1 class="game-title">{{ game.title }}</h1>
-          <p class="game-description"></p>
-          <p-rating [cancel]="false"></p-rating>
-          <div class="game-rating">      
-          <span class="rating-value"></span>
-          </div>
-          
-          <div class="requirements-container">
-            <table class="requirements-table">
-              <tr>
-                <th>Players</th>
-                <th>Playing time</th>
-                <th>Age</th>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td>{{game.age}} + </td>
-              </tr>
-            </table>             
-          </div>
-          
-      </div>
-      <p-button icon="pi pi-heart" severity="help"></p-button>
-</div>
-<!-- <div class="navbar">
-<nav>
-  <div>
-    <button id="overview" (click)="showContent('overview')">Overview</button>
-    <button id="ratings" (click)="showContent('ratings')">Ratings</button>
-    <button id="images" (click)="showContent('images')">Images</button>
+  <p-image [src]="'assets/images/' + game.img" alt="Image" width="250" [preview]="true"></p-image>
+      
+  <div class="game-info">
+    <h1 class="game-title">{{game.title}}</h1>
+    <p class="game-description">{{game.short_description}}</p>
+    <p-rating [cancel]="false"></p-rating>
+    <div class="game-rating">      
+    <span class="rating-value"></span>
+    </div>  
+  <div class="requirements-container">
+    <table class="requirements-table">
+      <tr>
+        <th>Players</th>
+        <th>Playing time</th>
+        <th>Age</th>
+      </tr>
+      <tr>
+        <td>{{game.max_players}}</td>
+        <td></td>
+        <td>{{game.age}}</td>
+      </tr>
+    </table>             
   </div>
-  <div class="overview">
+  </div>
+  <p-button icon="pi pi-heart" severity="help"></p-button>
+</div>
 
-  <div *ngIf="currentView === 'overview'">
-    <h1 class="desc">Opis</h1>
-    <p class="longdesc">Brass: Birmingham is an economic strategy game sequel to Martin Wallace' 2007 masterpiece, Brass. Brass: Birmingham tells the story of competing entrepreneurs in Birmingham during the industrial revolution, between the years of 1770-1870.<br>
-      <br>
-      It offers a very different story arc and experience from its predecessor. As in its predecessor, you must develop, build, and establish your industries and network, in an effort to exploit low or high market demands. The game is played over two halves: the canal era (years 1770-1830) and the rail era (years 1830-1870). To win the game, score the most VPs. VPs are counted at the end of each half for the canals, rails and established (flipped) industry tiles.<br>
-      <br>
-      Each round, players take turns according to the turn order track, receiving two actions to perform any of the following actions (found in the original game):<br>
-      <br>
-      1) Build - Pay required resources and place an industry tile.<br>
-      2) Network - Add a rail / canal link, expanding your network.<br>
-      3) Develop - Increase the VP value of an industry.<br>
-      4) Sell - Sell your cotton, manufactured goods and pottery.<br>
-      5) Loan - Take a £30 loan and reduce your income.<br>
-      <br>
-      Brass: Birmingham also features a new sixth action:<br>
-      <br>
-      6) Scout - Discard three cards and take a wild location and wild industry card. (This action replaces Double Action Build in original Brass.)</p><br>
-  </div>
-</div>
-  <div *ngIf="currentView === 'ratings'">
-    <p>This is the ratings content.</p>
-  </div>
-  
-  <div *ngIf="currentView === 'images'">
-    <p>This is the images content.</p>
-  </div>
-</nav>
-</div> 
--->
 <div class="ogolne">
 <p-tabView>
-<p-tabPanel header="Opis" background='black'>
+  <p-tabPanel header="Opis" background='black'>
+    <p>{{game.long_description}}</p>
+  </p-tabPanel>
+  <p-tabPanel header="Oceny">
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-</p-tabPanel>
-<p-tabPanel header="Oceny">
-    <p>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-        ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
-    </p>
-</p-tabPanel>
-<p-tabPanel header="Zdjęcia">
-    <p>
-      asd
-    </p>
-</p-tabPanel>
+      <div class="comment-section">
+        <h2>Komentarze:</h2>
+          <div *ngFor="let comment of getComments()">
+            <p><strong>{{ comment.username }}</strong> - {{ comment.content }}</p>
+            <p class="timestamp">{{ comment.timestamp | date: 'medium' }}</p>
+          </div>
+        
+      <div class="comment-form">
+        <h3>Dodaj komentarz</h3>
+          <form #commentForm="ngForm" (ngSubmit)="addComment(commentForm.value.username, commentForm.value.content)">
+              <label for="username">Username:</label><br>
+              <input type="text" id="username" name="username" ngModel required><br>
+        
+              <label for="content">Comment:</label><br>
+              <textarea id="content" name="content" ngModel required></textarea><br>
+              <p-button type="submit" [disabled]="!commentForm.valid" label="Submit"></p-button>
+          </form>
+      </div>
+      </div>
+  </p-tabPanel>
+  <p-tabPanel header="Zdjęcia">
+      <!--<p>
+        <p-galleria [(value)]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5">
+          <ng-template pTemplate="item" let-item>
+              <img [src]="item.itemImageSrc" style="width: 100%;" />
+          </ng-template>
+          <ng-template pTemplate="thumbnail" let-item>
+              <div class="grid grid-nogutter justify-content-center">
+                  <img [src]="item.thumbnailImageSrc" />
+              </div>
+          </ng-template>
+      </p-galleria>
+      </p>-->
+  </p-tabPanel>
 </p-tabView>
 </div>
-<!-- <div class="comment-section">
-<h2>Komentarze:</h2>
-<div *ngFor="let comment of getComments()">
-  <p><strong>{{ comment.username }}</strong> - {{ comment.content }}</p>
-  <p class="timestamp">{{ comment.timestamp | date: 'medium' }}</p>
-</div>
 
-<div class="comment-form">
-  <h3>Dodaj komentarz</h3>
-  <form #commentForm="ngForm" (ngSubmit)="addComment(commentForm.value.username, commentForm.value.content)">
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username" ngModel required><br>
-
-    <label for="content">Comment:</label><br>
-    <textarea id="content" name="content" ngModel required></textarea><br>
-    <p-button type="submit" [disabled]="!commentForm.valid" label="Submit"></p-button>
-  </form>
-</div>
-</div> -->
 
 
 

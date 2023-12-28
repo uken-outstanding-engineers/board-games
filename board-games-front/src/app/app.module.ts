@@ -15,6 +15,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { BoardGamesPanelComponent } from './board-games-panel/board-games-panel.component';
+import { GameDetailsComponent } from './game-details/game-details.component';
+import { BoardCategoryPanelComponent } from './board-category-panel/board-category-panel.component';
 
 import { MenubarModule } from 'primeng/menubar';
 import { TableModule } from 'primeng/table';
@@ -40,8 +42,10 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputNumberModule} from 'primeng/inputnumber';
 import { ConfirmationService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { GameDetailsComponent } from './game-details/game-details.component';
-import { BoardCategoryPanelComponent } from './board-category-panel/board-category-panel.component';
+
+import { ImageModule } from 'primeng/image';
+import { GalleriaModule } from 'primeng/galleria';
+import { HomeSiteComponent } from './home-site/home-site.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +56,7 @@ import { BoardCategoryPanelComponent } from './board-category-panel/board-catego
     BoardGamesPanelComponent,
     GameDetailsComponent,
     BoardCategoryPanelComponent,
+    HomeSiteComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +86,9 @@ import { BoardCategoryPanelComponent } from './board-category-panel/board-catego
     ProgressBarModule,
     RadioButtonModule,
     InputNumberModule,
-    InputTextareaModule
+    InputTextareaModule,
+    ImageModule,
+    GalleriaModule
   ],
   providers: [
     MessageService,

@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Games } from '../api/game'; 
 import { GamesService } from '../api/game-service';
 import { Table } from 'primeng/table';
-
+import { CommentService } from '../api/comment-service';
+import { Comment } from '../api/comment';
+import { Games } from '../api/game'; 
+import { ImageModule } from 'primeng/image';
+import { TabViewModule } from 'primeng/tabview';
 
 @Component({
   selector: 'app-game-details',
@@ -15,35 +18,55 @@ import { Table } from 'primeng/table';
 export class GameDetailsComponent implements OnInit {
 
   @ViewChild('dt') dt: Table | undefined;
+  game: Games = {}; // Initialize an empty game object
 
-  //gameDialog: boolean = false; 
-
-  games: Games[] = []; 
-
-  game!: Games; 
-
-  //selectedGames!: Games[] | null; 
-
-  //submitted: boolean = false;
-
-  //currentView: string = '';
+  currentView: string = '';
 
   constructor(
-    private GamesService: GamesService,
+    private gamesService: GamesService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private route: ActivatedRoute
+    private commentService: CommentService,
+    private router: Router,
+    private route: ActivatedRoute // Correct injection
   ) {}
-    
+
   ngOnInit() {
-    this.GamesService.getGames().subscribe(
-      (data: Games[]) => {
-        this.games = data;
-        this.game = this.games[0];
-      },
-      (error) => {
-        console.error('Wystąpił błąd podczas pobierania danych!', error);
-      }
-    );
+    this.route.params.subscribe(params => {
+      const gameId = params['id'];
+
+      this.gamesService.getGames().subscribe((games: Games[]) => {
+        const selectedGame = games.find(game => game.id === +gameId);
+
+        if (selectedGame) {
+          this.game = selectedGame;
+        } else {
+          console.error(`Game with id ${gameId} not found.`);
+        }
+      });
+    });
+  }
+  
+  
+  applyFilterGlobal(event: any, stringVal: string) {
+    this.dt!.filterGlobal((event.target as HTMLInputElement).value, stringVal);
+  }
+
+  showContent(view: string) {
+    this.currentView = view;
+  }
+
+  addComment(username: string, content: string): void {
+    const newComment: Comment = {
+      username,
+      content,
+      timestamp: new Date(),
+    };
+
+    this.commentService.addComment(newComment);
+  }
+
+  getComments(): Comment[] {
+    return this.commentService.getComments();
   }
 }

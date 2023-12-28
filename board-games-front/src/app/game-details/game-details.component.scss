@@ -1,140 +1,139 @@
 /* game-details.component.scss */
 body {
-    background-color: rgb(153, 151, 151);
-    padding: 10px;
-  }
-  
-  img {
-    display: block;
-    margin: 0;
-    height: 220px;
-    width: 220px;
-  }
-  .ogolne{
-    display: block;
-    clear:both;
-  }
-  
-  .background{
-    background-color: rgba(2, 1, 1, 0.836);
-    height: 500px;
-    width: 100%;
-    display: flex;
-    padding: 20px;
-    /*background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6) 26.48%, rgba(224, 224, 224, 0.6) 73.52%);*/
-    /*background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 70%, rgba(253, 252, 252, 0) 100%), url('/assets/1.png');*/
-    background-image: linear-gradient(90deg,#0a090f 70%,rgba(248, 248, 248, 0.65));
-    font-family: sans-serif;
-    font-weight: bold;
-    background-repeat: no-repeat;
-    .game-info {
-      flex: 1;
-      margin: 100px;
-  
-      .game-title {
-        font-size: 24px;
-        margin-bottom: 10px;
-        color: white;
-      }
-      
-      .game-description {
-        font-size: 16px;
-        margin-bottom: 15px;
-        color: white;
-      }
-      
-      .game-rating {
-        display: flex;
-        align-items: center;
-        position: relative;
-          
-        .rating-value {
-          width: 30px;
-          height: 30px;
-          font-size: 18px;
-          font-weight: bold;
-          background-color: rgb(4, 0, 255);
-          position: relative;
-          align-items: center;
-          display: flex;
-          justify-content: center;
-          color: rgb(255, 255, 255); /* Lub dowolny kolor, który chcesz użyć dla oceny */
-          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-        }
-      }
-      .requirements-container {
-        display: flex;
-      }
-  
-      .requirements-table {
-        color: white;
-        width: 500px;
-        text-align: center;
-        border-collapse: collapse; /* Dodaj to, aby border-collapse działało poprawnie */
-        border: 1px solid white; /* Dodaj obramowanie tabelki */
-        margin-top: 20px;
-      }
-          
-      .requirements-table th, .requirements-table td {
-        border: 1px solid white; /* Dodaj obramowanie dla komórek */
-        padding: 8px; /* Dodaj odstęp wewnątrz komórek */
-      }          
+  background-color: rgb(153, 151, 151);
+  padding: 10px;
+}
+
+img {
+  display: block;
+  margin: 0;
+  height: 220px;
+  width: 220px;
+}
+.ogolne{
+  display: block;
+  clear:both;
+}
+
+.background{
+  background-color: rgba(2, 1, 1, 0.836);
+  height: 500px;
+  width: 100%;
+  display: flex;
+  padding: 20px;
+  /*background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6) 26.48%, rgba(224, 224, 224, 0.6) 73.52%);*/
+  /*background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 70%, rgba(253, 252, 252, 0) 100%), url('/assets/1.png');*/
+  background-image: linear-gradient(90deg,#0a090f 70%,rgba(248, 248, 248, 0.65));
+  font-family: sans-serif;
+  font-weight: bold;
+  background-repeat: no-repeat;
+  .game-info {
+    flex: 1;
+    margin: 100px;
+
+    .game-title {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: white;
     }
+    
+    .game-description {
+      font-size: 16px;
+      margin-bottom: 15px;
+      color: white;
+    }
+    
+    .game-rating {
+      display: flex;
+      align-items: center;
+      position: relative;
+        
+      .rating-value {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+        font-weight: bold;
+        background-color: rgb(4, 0, 255);
+        position: relative;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        color: rgb(255, 255, 255); /* Lub dowolny kolor, który chcesz użyć dla oceny */
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      }
+    }
+    .requirements-container {
+      display: flex;
+    }
+
+    .requirements-table {
+      color: white;
+      width: 500px;
+      text-align: center;
+      border-collapse: collapse; /* Dodaj to, aby border-collapse działało poprawnie */
+      border: 1px solid white; /* Dodaj obramowanie tabelki */
+      margin-top: 20px;
+    }
+        
+    .requirements-table th, .requirements-table td {
+      border: 1px solid white; /* Dodaj obramowanie dla komórek */
+      padding: 8px; /* Dodaj odstęp wewnątrz komórek */
+    }          
   }
-  
-  .overview{
-    margin: 20px;
-    display: left;
-  }
-  
-  .longdesc:before {
-    position: relative;
-    left: 0;
-    top: 50%;
-    height: 1px;
-    background: rgb(0, 0, 0);
-    content: "";
-    width: 100%;
-    display: block;
-  }
-  
-  .navbar {
-    background-color: rgb(153, 151, 151);
-    margin: 20px;
-    overflow: hidden;
-    width: 100%
-  }
-  
-  .navbar a {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 5px 5px;
-    text-decoration: none;
-  }
-  
-  .navbar a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  .navbar a:active {
-    border-bottom: 2px solid #ff5100;
-  }
-  
-  .comment-section{
-    margin: 20px;
-  }
-  #username{
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  #content{
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  
+}
+
+.overview{
+  margin: 20px;
+  display: left;
+}
+
+.longdesc:before {
+  position: relative;
+  left: 0;
+  top: 50%;
+  height: 1px;
+  background: rgb(0, 0, 0);
+  content: "";
+  width: 100%;
+  display: block;
+}
+
+.navbar {
+  background-color: rgb(153, 151, 151);
+  margin: 20px;
+  overflow: hidden;
+  width: 100%
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 5px 5px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.navbar a:active {
+  border-bottom: 2px solid #ff5100;
+}
+
+.comment-section{
+  margin: 20px;
+}
+#username{
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+#content{
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}

@@ -19,12 +19,11 @@
         [value]="games"
         [rows]="10"
         [paginator]="true"
-        [globalFilterFields]="['title', 'country.title', 'representative.title', 'status']"
+        [globalFilterFields]="['title']"
         [tableStyle]="{ 'min-width': '75rem' }"
         [(selection)]="selectedGames"
         [rowHover]="true"
         dataKey="id"
-        
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [showCurrentPageReport]="true"
     >
@@ -44,7 +43,7 @@
                 </th>
                 <th pSortableColumn="title" style="min-width:15rem">Title <p-sortIcon field="title"></p-sortIcon></th>
                 <th>Image</th>
-                <th pSortableColumn="category" style="min-width:10rem">Category <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="gametype1" style="min-width:10rem">Category <p-sortIcon field="gametype1"></p-sortIcon></th>
                 <th pSortableColumn="published" style="min-width:10rem">Published <p-sortIcon field="published"></p-sortIcon></th>
                 <th pSortableColumn="max_players" style="min-width:10rem">Max Players <p-sortIcon field="max_players"></p-sortIcon></th>
                 <th pSortableColumn="age" style="min-width:10rem">Min. Age <p-sortIcon field="age"></p-sortIcon></th>

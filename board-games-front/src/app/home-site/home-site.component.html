@@ -12,6 +12,8 @@
         [(selection)]="selectedGames"
         [rowHover]="true"
         dataKey="id"
+        sortField="likes"
+        [sortOrder]="-1"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [showCurrentPageReport]="true"
     >

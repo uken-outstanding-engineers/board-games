@@ -3,15 +3,15 @@
     <p-toast></p-toast>
     <p-toolbar styleClass="mb-4 gap-2">
         <ng-template pTemplate="left">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-            <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedGames()" [disabled]="!selectedGames || !selectedGames.length"></button>
+            <button pButton pRipple label="Dodaj nowy" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+            <button pButton pRipple label="Usuń" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedGames()" [disabled]="!selectedGames || !selectedGames.length"></button>
             <!--[label]-->
         </ng-template>
 
-        <ng-template pTemplate="right">
+        <!-- <ng-template pTemplate="right">
             <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
             <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
-        </ng-template>
+        </ng-template> -->
     </p-toolbar>
 
     <p-table
@@ -24,7 +24,7 @@
         [(selection)]="selectedGames"
         [rowHover]="true"
         dataKey="id"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        currentPageReportTemplate="Wyświetlanie od {first} do {last} z {totalRecords} wpisów"
         [showCurrentPageReport]="true"
     >
         <ng-template pTemplate="caption">
@@ -32,7 +32,7 @@
                 <h5 class="m-0">Panel Gier Planszowych</h5>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Szukaj..." />
                 </span>
             </div>
         </ng-template>
@@ -41,14 +41,14 @@
                 <th style="width: 4rem">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th pSortableColumn="title" style="min-width:15rem">Title <p-sortIcon field="title"></p-sortIcon></th>
-                <th>Image</th>
-                <th pSortableColumn="gametype1" style="min-width:10rem">Category <p-sortIcon field="gametype1"></p-sortIcon></th>
-                <th pSortableColumn="published" style="min-width:10rem">Published <p-sortIcon field="published"></p-sortIcon></th>
-                <th pSortableColumn="max_players" style="min-width:10rem">Max Players <p-sortIcon field="max_players"></p-sortIcon></th>
-                <th pSortableColumn="age" style="min-width:10rem">Min. Age <p-sortIcon field="age"></p-sortIcon></th>
-                <th pSortableColumn="likes">Likes <p-sortIcon field="likes"></p-sortIcon></th>
-                <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+                <th pSortableColumn="title" style="min-width:15rem">Tytuł <p-sortIcon field="title"></p-sortIcon></th>
+                <th>Zdjęcie</th>
+                <th pSortableColumn="gametype1" style="min-width:10rem">Kategoria <p-sortIcon field="gametype1"></p-sortIcon></th>
+                <th pSortableColumn="published" style="min-width:10rem">Rok publikacji <p-sortIcon field="published"></p-sortIcon></th>
+                <th pSortableColumn="max_players" style="min-width:10rem">Max. Liczba Graczy <p-sortIcon field="max_players"></p-sortIcon></th>
+                <th pSortableColumn="age" style="min-width:10rem">Min. Wiek <p-sortIcon field="age"></p-sortIcon></th>
+                <th pSortableColumn="likes">Polubienia <p-sortIcon field="likes"></p-sortIcon></th>
+                <th pSortableColumn="price">Cena <p-sortIcon field="price"></p-sortIcon></th>
                 <th></th>
             </tr>
         </ng-template>
@@ -66,7 +66,8 @@
                 <td>{{ game.max_players }}</td>
                 <td>{{ game.age }}</td>
                 <td>{{ game.likes }}</td>
-                <td>{{ game.price | currency: 'USD' }}</td> 
+                <td>{{ game.price}} zł</td>
+                <!-- <td>{{ game.price | currency: 'USD' }}</td>  -->
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editGame(game)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteGame(game)"></button>
@@ -74,7 +75,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="summary">
-            <div class="flex align-items-center justify-content-between">In total there are {{ games ? games.length : 0 }} games.</div>
+            <div class="flex align-items-center justify-content-between">Całkowita ilość gier wynosi: {{ games ? games.length : 0 }}</div>
         </ng-template>
     </p-table>
 </div>
@@ -82,17 +83,19 @@
     <ng-template pTemplate="content">
         <img [src]="'assets/images/' + game.img" [alt]="game.title" [style]="{ width: '250px', height: '250px' }" class="block m-auto pb-3" *ngIf="game.img" />
         <div class="field">
-            <label for="title">Title</label>
+            <label for="title">Tytuł</label>
             <input type="text" pInputText id="Title" [(ngModel)]="game.title" required autofocus />
-            <small class="p-error" *ngIf="submitted && !game.title">Title is required.</small>
+            <small class="p-error" *ngIf="submitted && !game.title">Tytuł jest wymagany.</small>
         </div>
         <div class="field">
-            <label for="short_description">Short Description</label>
+            <label for="short_description">Krtótki Opis</label>
             <textarea id="short_description" pInputTextarea [(ngModel)]="game.short_description" required rows="3" cols="20"></textarea>
+            <small class="p-error" *ngIf="submitted && !game.short_description">Krtótki opis jest wymagany.</small>
         </div>
         <div class="field">
-            <label for="long_description">Long Description</label>
+            <label for="long_description">Długi Opis</label>
             <textarea id="long_description" pInputTextarea [(ngModel)]="game.long_description" required rows="3" cols="20"></textarea>
+            <small class="p-error" *ngIf="submitted && !game.long_description">Długi opis jest wymagany.</small>
         </div>
 
         <div class="formgrid grid">
@@ -105,28 +108,31 @@
         </div>
 
         <div class="field">
-            <label for="published">Published</label>
+            <label for="published">Rok publikacji</label>
             <input type="text" pInputText id="published" [(ngModel)]="game.published" required autofocus />
+            <small class="p-error" *ngIf="submitted && !game.published">Rok publikacji jest wymagany.</small>
         </div>
         <div class="field">
-            <label for="max_players">Max Players</label>
+            <label for="max_players">Max. Liczba Graczy</label>
             <input type="text" pInputText id="max_players" [(ngModel)]="game.max_players" required autofocus />
+            <small class="p-error" *ngIf="submitted && !game.max_players">Max liczba graczy jest wymagana.</small>
         </div>
         <div class="field">
-            <label for="age">Min. Age</label>
+            <label for="age">Min. Wiek</label>
             <input type="text" pInputText id="age" [(ngModel)]="game.age" required autofocus />
+            <small class="p-error" *ngIf="submitted && !game.age">Min wiek.</small>
         </div>
         <div class="formgrid grid">
             <div class="field col">
-                <label for="price">Price</label>
+                <label for="price">Cena</label>
                 <p-inputNumber id="price" [(ngModel)]="game.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
             </div>
         </div>
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveGame()"></button>
+        <button pButton pRipple label="Anuluj" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Zapisz" icon="pi pi-check" class="p-button-text" (click)="saveGame()"></button>
     </ng-template>
 </p-dialog>
 

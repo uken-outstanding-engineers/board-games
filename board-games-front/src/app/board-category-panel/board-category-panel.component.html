@@ -3,15 +3,15 @@
     <p-toast></p-toast>
     <p-toolbar styleClass="mb-4 gap-2">
         <ng-template pTemplate="left">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-            <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedCategories()" [disabled]="!selectedCategory || !selectedCategory.length"></button>
+            <button pButton pRipple label="Dodaj nowy" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+            <button pButton pRipple label="Usuń" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedCategories()" [disabled]="!selectedCategory || !selectedCategory.length"></button>
             <!--[label]-->
         </ng-template>
 
-        <ng-template pTemplate="right">
+        <!-- <ng-template pTemplate="right">
             <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
             <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
-        </ng-template>
+        </ng-template> -->
     </p-toolbar>
 
     <p-table
@@ -24,16 +24,16 @@
         [(selection)]="selectedCategory"
         [rowHover]="true"
         dataKey="id"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        currentPageReportTemplate="Wyświetlanie od {first} do {last} z {totalRecords} wpisów"
         [showCurrentPageReport]="true"
     >
     <!-- sortField="type" -->
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
-                <h5 class="m-0">Panel Gier Planszowych</h5>
+                <h5 class="m-0">Panel Kategori Gier Planszowych</h5>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Szukaj..." />
                 </span>
             </div>
         </ng-template>
@@ -43,7 +43,7 @@
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
                 <!-- <th pSortableColumn="id" style="min-width:15rem">Id <p-sortIcon field="id"></p-sortIcon></th> -->
-                <th pSortableColumn="type" style="min-width:15rem">Type <p-sortIcon field="type"></p-sortIcon></th>
+                <th pSortableColumn="type" style="min-width:15rem">Nazwa kategori <p-sortIcon field="type"></p-sortIcon></th>
                 <th></th>
             </tr>
         </ng-template>
@@ -61,22 +61,22 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="summary">
-            <div class="flex align-items-center justify-content-between">In total there are {{ categories ? categories.length : 0 }} categories.</div>
+            <div class="flex align-items-center justify-content-between">Całkowita ilość kategorii wynosi: {{ categories ? categories.length : 0 }}</div>
         </ng-template>
     </p-table>
 </div>
 <p-dialog [(visible)]="categoryDialog" [style]="{ width: '450px' }" header="Gra planszowa" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="field">
-            <label for="type">Type</label>
+            <label for="type">Nazwa kategori</label>
             <input type="text" pInputText id="Type" [(ngModel)]="category.type" required autofocus />
-            <small class="p-error" *ngIf="submitted && !category.type">Type is required.</small>
+            <small class="p-error" *ngIf="submitted && !category.type">Nazwa jest zajęta.</small>
         </div>
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCategory()"></button>
+        <button pButton pRipple label="Anuluj" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Zapisz" icon="pi pi-check" class="p-button-text" (click)="saveCategory()"></button>
     </ng-template>
 </p-dialog>
 

@@ -11,6 +11,6 @@ export interface Games {
     max_players?: number;
     age?: number; 
     likes?: number;    
-    price?: number;
+    price?: number | null;
     reference?: string;
 }

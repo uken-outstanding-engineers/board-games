@@ -48,9 +48,11 @@ export class BoardCategoryPanelComponent implements OnInit{
 
   deleteSelectedCategories() {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected categories?', 
-      header: 'Confirm',
+      message: 'Czy na pewno chcesz usunąć wybrane kategorie?', 
+      header: 'Zatwierdź',
       icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Tak',
+      rejectLabel: 'Nie',
       accept: () => {
         if (this.selectedCategory) {
           this.selectedCategory.forEach(category => {
@@ -58,10 +60,10 @@ export class BoardCategoryPanelComponent implements OnInit{
               this.CategoryService.deleteCategory(category.id).subscribe(
                 () => {
                   this.categories = this.categories.filter((val) => val.id !== category.id); 
-                  this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Categories Deleted', life: 3000 }); 
+                  this.messageService.add({ severity: 'success', summary: 'Operacja zakończona sukcesem', detail: 'Kategorie zostały usunięte', life: 3000 }); 
                 },
                 (error: any) => {
-                  console.error('Error deleting category:', error);
+                  console.error('Błąd podczas usuwania kategorii:', error);
                 }
               );
             }
@@ -81,18 +83,20 @@ export class BoardCategoryPanelComponent implements OnInit{
     const id = category.id ?? -1;
         
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + category.type + '?', 
-            header: 'Confirm',
+            message: 'Czy na pewno chcesz usunąć ' + category.type + '?', 
+            header: 'Zatwierdź',
             icon: 'pi pi-exclamation-triangle',
+            acceptLabel: 'Tak',
+            rejectLabel: 'Nie',
             accept: () => {
                 this.CategoryService.deleteCategory(id).subscribe(
                   () => {
                     this.categories = this.categories.filter((val) => val.id !== category.id);
                     this.category = {};
-                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Category Deleted', life: 3000 });
+                    this.messageService.add({ severity: 'success', summary: 'Operacja zakończona sukcesem', detail: 'Kategoria została usunięta', life: 3000 });
                   },
                   (error: any) => {
-                    console.error('Error deleting category:', error);
+                    console.error('Błąd podczas usuwania kategori:', error);
                   }
                 );
               }
@@ -112,28 +116,31 @@ export class BoardCategoryPanelComponent implements OnInit{
         this.categories[this.findIndexById(this.category.id)] = this.category; 
         this.CategoryService.updateCategory(this.category).subscribe(
           (updatedCategoryData: any) => {
-            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Category Updated', life: 3000 });
+            this.messageService.add({ severity: 'success', summary: 'Operacja zakończona sukcesem', detail: 'Kategoria została zaktualizowana', life: 3000 });
           },
           (error: any) => {
-            console.error('Error updating category:', error);
-            this.messageService.add({ severity: 'error',summary: 'Error', detail: 'Failed to update category', life: 3000 });
+            console.error('Błąd podczas aktualizowania kategori:', error);
+            this.messageService.add({ severity: 'error',summary: 'Błąd', detail: 'Nie powiodło się zaktualizować kategori', life: 3000 });
           }
         );
-        console.log("nie działa");
       }
       else {
-            this.CategoryService.addCategory(this.category).subscribe(
-                (data: any) => {
-                  console.log('Dodano nową grę:', data);
-                  this.categories.push(data);
-                  this.categories = this.categories.slice();
-                  this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Category Created', life: 3000 });
-                },
-                (error) => {
-                  console.error('Błąd podczas dodawania gry:', error);
-                  this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to add category', life: 3000 });
-                }
-              );
+        if (this.categories.find(cat => cat.type === this.category.type)) {
+          this.messageService.add({ severity: 'error', summary: 'Błąd', detail: 'Kategoria już istnieje', life: 3000 });
+        } else {
+          this.CategoryService.addCategory(this.category).subscribe(
+              (data: any) => {
+                console.log('Dodano nową grę:', data);
+                this.categories.push(data);
+                this.categories = this.categories.slice();
+                this.messageService.add({ severity: 'success', summary: 'Operacja zakończona sukcesem', detail: 'Kategoria została utworzona', life: 3000 });
+              },
+              (error) => {
+                console.error('Błąd podczas dodawania gry:', error);
+                this.messageService.add({ severity: 'error', summary: 'Błąd', detail: 'Nie powiodło się dodanie kategorii', life: 3000 });
+              }
+            );
+          }
         }
 
         this.categories = [...this.categories]; 

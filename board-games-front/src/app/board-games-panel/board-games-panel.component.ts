@@ -37,7 +37,7 @@ export class BoardGamesPanelComponent implements OnInit{
             this.games = data;
           },
           (error) => {
-            console.error('Wystąpił błąd podczas pobierania danych!', error);
+            console.error('Wystąpił błąd podczas pobierania gier planszowych!', error);
           }
         );
 
@@ -64,9 +64,11 @@ export class BoardGamesPanelComponent implements OnInit{
 
     deleteSelectedGames() {
       this.confirmationService.confirm({
-        message: 'Are you sure you want to delete the selected games?', 
-        header: 'Confirm',
+        message: 'Czy na pewno chcesz usunąć wybrane gry?', 
+        header: 'Potwierdź',
         icon: 'pi pi-exclamation-triangle',
+        acceptLabel: 'Tak',
+        rejectLabel: 'Nie',
         accept: () => {
           if (this.selectedGames) {
             this.selectedGames.forEach(game => {
@@ -74,10 +76,10 @@ export class BoardGamesPanelComponent implements OnInit{
                 this.GamesService.deleteGame(game.id).subscribe(
                   () => {
                     this.games = this.games.filter((val) => val.id !== game.id); 
-                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Games Deleted', life: 3000 }); 
+                    this.messageService.add({ severity: 'success', summary: 'Operacja zakończona sukcesem', detail: 'Gry zostały usunięte', life: 3000 }); 
                   },
                   (error: any) => {
-                    console.error('Error deleting game:', error);
+                    console.error('Błąd podczas usuwania gier:', error);
                   }
                 );
               }
@@ -97,18 +99,20 @@ export class BoardGamesPanelComponent implements OnInit{
         const id = game.id ?? -1;
         
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + game.title + '?', 
-            header: 'Confirm',
+            message: 'Czy na pewno chcesz usunąć ' + game.title + '?', 
+            header: 'Potwierdź',
             icon: 'pi pi-exclamation-triangle',
+            acceptLabel: 'Tak',
+            rejectLabel: 'Nie',
             accept: () => {
                 this.GamesService.deleteGame(id).subscribe(
                   () => {
                     this.games = this.games.filter((val) => val.id !== game.id);
                     this.game = {};
-                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Game Deleted', life: 3000 });
+                    this.messageService.add({ severity: 'success', summary: 'Operacja zakończona sukcesem', detail: 'Gra została usunięta', life: 3000 });
                   },
                   (error: any) => {
-                    console.error('Error deleting game:', error);
+                    console.error('Błąd podczas usuwania gry:', error);
                   }
                 );
               }
@@ -123,16 +127,16 @@ export class BoardGamesPanelComponent implements OnInit{
     saveGame() {
         this.submitted = true;
 
-        if (this.game.title?.trim()) {
+        if (this.game.title?.trim() && this.game.short_description?.trim() && this.game.long_description?.trim() && this.game.published && this.game.max_players && this.game.age) {
           if (this.game.id) { //edit game
             this.games[this.findIndexById(this.game.id)] = this.game; 
             this.GamesService.updateGame(this.game).subscribe(
               (updatedGameData: any) => {
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Game Updated', life: 3000 });
+                this.messageService.add({ severity: 'success', summary: 'Operacja zakończona sukcesem', detail: 'Gra została zaktualizowana', life: 3000 });
               },
               (error: any) => {
-                console.error('Error updating game:', error);
-                this.messageService.add({ severity: 'error',summary: 'Error', detail: 'Failed to update game', life: 3000 });
+                console.error('Błąd podczas aktualizowania gry:', error);
+                this.messageService.add({ severity: 'error',summary: 'Błąd', detail: 'Nie powiodło się zaktualizować gry', life: 3000 });
               }
             );
           }
@@ -141,24 +145,17 @@ export class BoardGamesPanelComponent implements OnInit{
                 
                 this.game.img = 'p1.jpg'; 
                 this.game.gametype1 = 1;
-                this.game.gametype2 = 1;
-                this.game.gametype3 = 1;
-                this.game.published = 2020;
-                this.game.max_players = 13;
-                this.game.age = 10;   
-                this.game.price = 0;
-                this.game.reference = "sdasad";
 
                 this.GamesService.addGame(this.game).subscribe(
                     (data: any) => {
                       console.log('Dodano nową grę:', data);
                       this.games.push(data);
                       this.games = this.games.slice();
-                      this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Game Created', life: 3000 });
+                      this.messageService.add({ severity: 'success', summary: 'Operacja zakończona sukcesem', detail: 'Gra została utworzona', life: 3000 });
                     },
                     (error) => {
                       console.error('Błąd podczas dodawania gry:', error);
-                      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to add game', life: 3000 });
+                      this.messageService.add({ severity: 'error', summary: 'Błąd', detail: 'Nie powiodło się dodanie gry', life: 3000 });
                     }
                   );
             }

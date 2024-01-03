@@ -31,6 +31,10 @@ export class NavbarComponent implements OnInit {
           label: this.username,
           items: [
             {
+              label: 'Polubione',
+              routerLink: '/liked-games',
+            },
+            {
               label: 'Ustawienia',
               routerLink: '/settings',
             },

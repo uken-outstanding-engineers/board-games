@@ -4,7 +4,7 @@
       
   <div class="game-info">
     <h1 class="game-title">{{game.title}}</h1>
-    <p class="game-description">{{game.short_description}}</p>
+    <p class="game-description">{{game.shortDescription}}</p>
     <p-rating [cancel]="false"></p-rating>
     <div class="game-rating">      
     <span class="rating-value"></span>
@@ -17,7 +17,7 @@
         <th>Age</th>
       </tr>
       <tr>
-        <td>{{game.max_players}}</td>
+        <td>{{game.maxPlayers}}</td>
         <td></td>
         <td>{{game.age}}</td>
       </tr>
@@ -30,27 +30,27 @@
 <div class="ogolne">
 <p-tabView>
   <p-tabPanel header="Opis" background='black'>
-    <p>{{game.long_description}}</p>
+    <p>{{game.longDescription}}</p>
   </p-tabPanel>
   <p-tabPanel header="Oceny">
     <p>
       <div class="comment-section">
         <h2>Komentarze:</h2>
-          <div *ngFor="let comment of getComments()">
+          <!-- <div *ngFor="let comment of getComments()">
             <p><strong>{{ comment.username }}</strong> - {{ comment.content }}</p>
             <p class="timestamp">{{ comment.timestamp | date: 'medium' }}</p>
-          </div>
+          </div> -->
         
       <div class="comment-form">
         <h3>Dodaj komentarz</h3>
-          <form #commentForm="ngForm" (ngSubmit)="addComment(commentForm.value.username, commentForm.value.content)">
+          <!-- <form #commentForm="ngForm" (ngSubmit)="addComment(commentForm.value.username, commentForm.value.content)">
               <label for="username">Username:</label><br>
               <input type="text" id="username" name="username" ngModel required><br>
         
               <label for="content">Comment:</label><br>
               <textarea id="content" name="content" ngModel required></textarea><br>
               <p-button type="submit" [disabled]="!commentForm.valid" label="Submit"></p-button>
-          </form>
+          </form> -->
       </div>
       </div>
   </p-tabPanel>

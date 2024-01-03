@@ -28,11 +28,18 @@ public class GameController {
 
         if (existingGame != null) {
             existingGame.setTitle(gameDetails.getTitle());
+            existingGame.setShortDescription(gameDetails.getShortDescription());
+            existingGame.setLongDescription(gameDetails.getLongDescription());
+            existingGame.setPublished(gameDetails.getPublished());
+            existingGame.setMaxPlayers(gameDetails.getMaxPlayers());
+            existingGame.setAge(gameDetails.getAge());
+            existingGame.setPrice(gameDetails.getPrice());
             return gameService.saveGame(existingGame);
         } else {
             return null;
         }
     }
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteGame(@PathVariable Long id) {

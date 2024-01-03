@@ -19,7 +19,7 @@ public class Game {
     @Column(name = "title")
     private String title;
     @Column(name = "short_description")
-    private String short_description;
+    private String shortDescription;
     @Column(name = "published")
     private Integer published;
     @Column(name = "likes")
@@ -28,10 +28,10 @@ public class Game {
     private Double price;
     @Column(name = "reference")
     private String reference;
-    @Column(name = "long_description")
-    private String long_description;
+    @Column(name = "longDescription")
+    private String longDescription;
     @Column(name = "max_players")
-    private Integer max_players;
+    private Integer maxPlayers;
     @Column(name = "img")
     private String img;
     @Column(name = "age")
@@ -48,4 +48,16 @@ public class Game {
     }
     public String getTitle() { return title;}
     public void setTitle(String title) { this.title = title;}
+    public String getShortDescription() {return shortDescription;}
+    public void setShortDescription(String shortDescription) {this.shortDescription = shortDescription;}
+    public String getLongDescription() {return longDescription;}
+    public void setLongDescription(String long_description) {this.longDescription = longDescription;}
+    public Integer getPublished() { return published;}
+    public void setPublished(Integer published) { this.published = published;}
+    public Integer getMaxPlayers() { return maxPlayers;}
+    public void setMaxPlayers(Integer maxPlayers) { this.maxPlayers = maxPlayers;}
+    public Integer getAge() { return age;}
+    public void setAge(Integer age) { this.age = age;}
+    public Double getPrice() { return price;}
+    public void setPrice(Double price) { this.price = price;}
 }

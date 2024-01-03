@@ -1,5 +1,6 @@
 export interface Comment {
-    username: string;
-    content: string;
-    timestamp: Date;
-  }
+  id?: number | null;
+  idUsers?: number;
+  comment?: string;
+  idGames?: number;
+}

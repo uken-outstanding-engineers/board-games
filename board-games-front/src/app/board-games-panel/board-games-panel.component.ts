@@ -127,16 +127,17 @@ export class BoardGamesPanelComponent implements OnInit{
     saveGame() {
         this.submitted = true;
 
-        if (this.game.title?.trim() && this.game.short_description?.trim() && this.game.long_description?.trim() && this.game.published && this.game.max_players && this.game.age) {
+        if (this.game.title?.trim() && this.game.shortDescription?.trim() && this.game.longDescription?.trim() && this.game.published && this.game.maxPlayers && this.game.age) {
           if (this.game.id) { //edit game
             this.games[this.findIndexById(this.game.id)] = this.game; 
+            console.log(this.game);
             this.GamesService.updateGame(this.game).subscribe(
               (updatedGameData: any) => {
                 this.messageService.add({ severity: 'success', summary: 'Operacja zakończona sukcesem', detail: 'Gra została zaktualizowana', life: 3000 });
               },
               (error: any) => {
                 console.error('Błąd podczas aktualizowania gry:', error);
-                this.messageService.add({ severity: 'error',summary: 'Błąd', detail: 'Nie powiodło się zaktualizować gry', life: 3000 });
+                this.messageService.add({ severity: 'error',summary: 'Błąd', detail: 'Nie powiodło się zaktualizowanie gry', life: 3000 });
               }
             );
           }
@@ -144,7 +145,7 @@ export class BoardGamesPanelComponent implements OnInit{
                 this.game.likes = 0; 
                 
                 this.game.img = 'p1.jpg'; 
-                this.game.gametype1 = 1;
+                //this.game.gametype1 = 1;
 
                 this.GamesService.addGame(this.game).subscribe(
                     (data: any) => {

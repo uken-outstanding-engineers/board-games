@@ -56,7 +56,7 @@ export class GameDetailsComponent implements OnInit {
     this.currentView = view;
   }
 
-  addComment(username: string, content: string): void {
+  /*addComment(username: string, content: string): void {
     const newComment: Comment = {
       username,
       content,
@@ -68,5 +68,5 @@ export class GameDetailsComponent implements OnInit {
 
   getComments(): Comment[] {
     return this.commentService.getComments();
-  }
+  }*/
 }

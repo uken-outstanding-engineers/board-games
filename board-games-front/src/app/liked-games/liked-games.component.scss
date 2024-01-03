@@ -1,0 +1,29 @@
+:host ::ng-deep body {
+    background-color: #e9eaed;
+}
+
+.card { 
+    border: none;
+}
+
+.p-component {
+    box-sizing: border-box;
+    background-color: #e9eaed;
+}
+
+:host ::ng-deep .p-dataview.p-dataview-list .p-dataview-content > .p-grid > div {
+    width: 70%;
+    margin: 10px 15%;
+    border: 3px solid #dee2e6;
+    border-radius: 20px;
+    // background-color: #e9eaed;
+    //border-width: 1px 0 0 0;
+}
+
+.short_description {
+    font-size: 12px;
+}
+
+.date {
+    font-style: italic;
+}

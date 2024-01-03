@@ -39,13 +39,13 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="width: 4rem">
-                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    <!-- <p-tableHeaderCheckbox></p-tableHeaderCheckbox> -->
                 </th>
                 <th pSortableColumn="title" style="min-width:15rem">Tytuł <p-sortIcon field="title"></p-sortIcon></th>
                 <th>Zdjęcie</th>
                 <th pSortableColumn="gametype1" style="min-width:10rem">Kategoria <p-sortIcon field="gametype1"></p-sortIcon></th>
                 <th pSortableColumn="published" style="min-width:10rem">Rok publikacji <p-sortIcon field="published"></p-sortIcon></th>
-                <th pSortableColumn="max_players" style="min-width:10rem">Max. Liczba Graczy <p-sortIcon field="max_players"></p-sortIcon></th>
+                <th pSortableColumn="maxPlayers" style="min-width:10rem">Max. Liczba Graczy <p-sortIcon field="maxPlayers"></p-sortIcon></th>
                 <th pSortableColumn="age" style="min-width:10rem">Min. Wiek <p-sortIcon field="age"></p-sortIcon></th>
                 <th pSortableColumn="likes">Polubienia <p-sortIcon field="likes"></p-sortIcon></th>
                 <th pSortableColumn="price">Cena <p-sortIcon field="price"></p-sortIcon></th>
@@ -63,7 +63,7 @@
                 <td>{{ getCategoryName(game.gametype1) }}</td>
                 <!-- <td>{{ game.gametype1 }}</td> -->
                 <td>{{ game.published }}</td>
-                <td>{{ game.max_players }}</td>
+                <td>{{ game.maxPlayers }}</td>
                 <td>{{ game.age }}</td>
                 <td>{{ game.likes }}</td>
                 <td>{{ game.price}} zł</td>
@@ -89,13 +89,13 @@
         </div>
         <div class="field">
             <label for="short_description">Krtótki Opis</label>
-            <textarea id="short_description" pInputTextarea [(ngModel)]="game.short_description" required rows="3" cols="20"></textarea>
-            <small class="p-error" *ngIf="submitted && !game.short_description">Krtótki opis jest wymagany.</small>
+            <textarea id="short_description" pInputTextarea [(ngModel)]="game.shortDescription" required rows="3" cols="20"></textarea>
+            <small class="p-error" *ngIf="submitted && !game.shortDescription">Krtótki opis jest wymagany.</small>
         </div>
         <div class="field">
             <label for="long_description">Długi Opis</label>
-            <textarea id="long_description" pInputTextarea [(ngModel)]="game.long_description" required rows="3" cols="20"></textarea>
-            <small class="p-error" *ngIf="submitted && !game.long_description">Długi opis jest wymagany.</small>
+            <textarea id="long_description" pInputTextarea [(ngModel)]="game.longDescription" required rows="3" cols="20"></textarea>
+            <small class="p-error" *ngIf="submitted && !game.longDescription">Długi opis jest wymagany.</small>
         </div>
 
         <div class="formgrid grid">
@@ -114,8 +114,8 @@
         </div>
         <div class="field">
             <label for="max_players">Max. Liczba Graczy</label>
-            <input type="text" pInputText id="max_players" [(ngModel)]="game.max_players" required autofocus />
-            <small class="p-error" *ngIf="submitted && !game.max_players">Max liczba graczy jest wymagana.</small>
+            <input type="text" pInputText id="max_players" [(ngModel)]="game.maxPlayers" required autofocus />
+            <small class="p-error" *ngIf="submitted && !game.maxPlayers">Max liczba graczy jest wymagana.</small>
         </div>
         <div class="field">
             <label for="age">Min. Wiek</label>
@@ -125,7 +125,7 @@
         <div class="formgrid grid">
             <div class="field col">
                 <label for="price">Cena</label>
-                <p-inputNumber id="price" [(ngModel)]="game.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+                <p-inputNumber id="price" [(ngModel)]="game.price" mode="currency" currency="PLN" locale="pl-PL"></p-inputNumber>
             </div>
         </div>
     </ng-template>

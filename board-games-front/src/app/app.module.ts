@@ -30,6 +30,7 @@ import { ToastModule } from 'primeng/toast';
 import { FileUploadModule } from 'primeng/fileupload';
 import { MessageService } from 'primeng/api';
 import { TabViewModule } from 'primeng/tabview';
+import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 
 import {CalendarModule} from 'primeng/calendar';
 import {SliderModule} from 'primeng/slider';
@@ -46,6 +47,10 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ImageModule } from 'primeng/image';
 import { GalleriaModule } from 'primeng/galleria';
 import { HomeSiteComponent } from './home-site/home-site.component';
+import { LikedGamesComponent } from './liked-games/liked-games.component';
+import { SettingsComponent } from './settings/settings.component';
+import { CommentListComponent } from './comment-list/comment-list.component';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +62,9 @@ import { HomeSiteComponent } from './home-site/home-site.component';
     GameDetailsComponent,
     BoardCategoryPanelComponent,
     HomeSiteComponent,
+    LikedGamesComponent,
+    SettingsComponent,
+    CommentListComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +85,7 @@ import { HomeSiteComponent } from './home-site/home-site.component';
     ToastModule,
     FileUploadModule,
     TabViewModule,
+    DataViewModule,
     CalendarModule, //start
     SliderModule,
     MultiSelectModule,

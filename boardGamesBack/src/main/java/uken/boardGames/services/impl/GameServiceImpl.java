@@ -24,7 +24,20 @@ public class GameServiceImpl implements GameService {
         Game existingGame = gameRepository.findById(id).orElse(null);
 
         if (existingGame != null) {
-            existingGame.setTitle(updatedGameDetails.getTitle());
+            if (updatedGameDetails.getTitle() != null)
+                existingGame.setTitle(updatedGameDetails.getTitle());
+            if (updatedGameDetails.getShortDescription() != null)
+                existingGame.setShortDescription(updatedGameDetails.getShortDescription());
+            if (updatedGameDetails.getLongDescription() != null)
+                existingGame.setLongDescription(updatedGameDetails.getLongDescription());
+            if (updatedGameDetails.getPublished() != null)
+                existingGame.setPublished(updatedGameDetails.getPublished());
+            if (updatedGameDetails.getMaxPlayers() != null)
+                existingGame.setMaxPlayers(updatedGameDetails.getMaxPlayers());
+            if (updatedGameDetails.getAge() != null)
+                existingGame.setAge(updatedGameDetails.getAge());
+            if (updatedGameDetails.getPrice() != null)
+                existingGame.setPrice(updatedGameDetails.getPrice());
 
             return gameRepository.save(existingGame);
         } else {

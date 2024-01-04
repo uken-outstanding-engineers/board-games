@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { TokenStorageService } from '../token-storage.service';
 
@@ -10,22 +11,23 @@ import { TokenStorageService } from '../token-storage.service';
 export class NavbarComponent implements OnInit {
   menuItems: MenuItem[] = [];
   isLoggedIn: boolean = false;
-  username: string = 'login';
+  username!: string;
 
-  constructor(private tokenStorageService: TokenStorageService) {}
+  constructor(
+    private tokenStorageService: TokenStorageService,
+    private router: Router
+    ) {}
 
   ngOnInit() {
     this.tokenStorageService.isLoggedIn$.subscribe((loggedIn: boolean) => {
-      this.isLoggedIn = !!this.tokenStorageService.getToken();
-      //if (this.isLoggedIn) {
-        //this.username = this.tokenStorageService.getUsername() || '';
-      //}
+      this.isLoggedIn = !!this.tokenStorageService.getToken();        
       this.updateMenuItems();
     });
   }
 
   private updateMenuItems(): void {
     if (this.isLoggedIn) {
+      this.updateUsername();
       this.menuItems = [
         {
           label: this.username,
@@ -64,9 +66,15 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  private updateUsername(): void {
+    this.username = this.tokenStorageService.getUserDataFromStorage().userid;
+  }
+
+
   logout(): void {
+    this.updateMenuItems(); 
     this.tokenStorageService.removeToken(); 
     this.tokenStorageService.setLoggedIn(false);
-    this.updateMenuItems(); 
+    this.router.navigate(['/']);
   }
 }

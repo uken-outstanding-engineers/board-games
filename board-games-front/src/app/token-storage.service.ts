@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class TokenStorageService {
   private accessTokenKey = 'accessToken';
-  //private usernameKey = 'username'; // Klucz dla nazwy użytkownika
+  private userKey = 'userData';
   private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
@@ -29,11 +29,21 @@ export class TokenStorageService {
 
   removeToken(): void {
     localStorage.removeItem(this.accessTokenKey);
-    //localStorage.removeItem(this.usernameKey); 
+    localStorage.removeItem(this.userKey); 
     this.isLoggedInSubject.next(false);
   }
 
   setLoggedIn(value: boolean): void {
     this.isLoggedInSubject.next(value);
   }
+
+  saveUserDataInStorage(userData: any): void {
+    localStorage.setItem(this.userKey, JSON.stringify(userData));
+  }
+
+  getUserDataFromStorage(): any | null {
+    const userData = localStorage.getItem(this.userKey);
+    return userData ? JSON.parse(userData) : null;
+  }
+  
 }

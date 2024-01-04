@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../token-storage.service';
+import { AuthUserService } from '../api/auth-user-service'; 
+import { NavbarComponent } from '../navbar/navbar.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -12,20 +15,30 @@ export class LoginComponent {
   password: string = ''; 
 
   constructor(
+    private http: HttpClient,
     private tokenStorageService: TokenStorageService,
-    private router: Router // Wstrzyknięcie usługi Router
+    private authUserService : AuthUserService,
+    private router: Router
   ) {}
 
   login(): void {
-    if (this.username === 'login' && this.password === 'password') {
-      console.log('Zalogowano pomyślnie!');
-      this.tokenStorageService.setToken('twój-token-jwt');
-      this.tokenStorageService.setLoggedIn(true);
-      //this.tokenStorageService.setUsername(this.username);
-
-      this.router.navigate(['/']);
-    } else {
-      console.log('Błąd logowania. Niepoprawna nazwa użytkownika lub hasło.');
-    }
-  }
+    this.authUserService.login(this.username, this.password).subscribe(
+      (data: any) => {
+        if (data !== null) {
+          this.tokenStorageService.setToken('twój-token-jwt');
+          this.tokenStorageService.saveUserDataInStorage(data);
+          this.tokenStorageService.setLoggedIn(true);
+          console.log('Zalogowano pomyślnie!', data);
+          this.router.navigate(['/']);
+        } else {
+          console.log('Błąd logowania. Niepoprawna nazwa użytkownika lub hasło.');
+          this.tokenStorageService.setLoggedIn(false);
+        }
+      },
+      (error) => {
+        console.log('Błąd logowania. Niepoprawna nazwa użytkownika lub hasło.', error);
+        this.tokenStorageService.setLoggedIn(false); 
+      }
+    );
+  }  
 }

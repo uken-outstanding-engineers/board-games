@@ -43,6 +43,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputNumberModule} from 'primeng/inputnumber';
 import { ConfirmationService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { PasswordModule } from 'primeng/password';
+import { CheckboxModule } from 'primeng/checkbox';
 
 import { ImageModule } from 'primeng/image';
 import { GalleriaModule } from 'primeng/galleria';
@@ -86,6 +88,8 @@ import { CommentListComponent } from './comment-list/comment-list.component';
     FileUploadModule,
     TabViewModule,
     DataViewModule,
+    PasswordModule,
+    CheckboxModule,
     CalendarModule, //start
     SliderModule,
     MultiSelectModule,

@@ -20,7 +20,7 @@ public class GameServiceImpl implements GameService {
 
     public Game saveGame(Game game) {return gameRepository.save(game);}
 
-    public Game editGame(Long id, Game updatedGameDetails) {
+    /*public Game editGame(Long id, Game updatedGameDetails) {
         Game existingGame = gameRepository.findById(id).orElse(null);
 
         if (existingGame != null) {
@@ -43,7 +43,7 @@ public class GameServiceImpl implements GameService {
         } else {
             return null;
         }
-    }
+    }*/
     public ResponseEntity<String> deleteGameById(Long id) {
         gameRepository.deleteById(id);
         return null;

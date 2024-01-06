@@ -13,13 +13,6 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
-//    @PostMapping("/login")
-//    public User loginUser(@RequestBody String userid, @RequestBody String passwd) {
-//        return userService.loginUser(userid, passwd);
-//        System.out.println("Wartosc userid: " + userid);
-//        System.out.println("Wartosc passwd: " + passwd);
-//        return null;
-//    }
     @PostMapping("/login")
     public User loginUser(@RequestBody Map<String, String> user) {
         String userid = user.get("username");
@@ -27,5 +20,30 @@ public class UserController {
 
         //token
         return userService.loginUser(userid, passwd);
+    }
+
+    @PutMapping("/update/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+        User existingUser = userService.findUserById(id);
+
+        if (existingUser != null) {
+            existingUser.setUserid(userDetails.getUserid());
+            existingUser.setEmail(userDetails.getEmail());
+            existingUser.setDescription(userDetails.getDescription());
+
+            return userService.saveUser(existingUser);
+        } else {
+            return null;
+        }
+    }
+
+    @PostMapping("/verifyPassword/{id}")
+    public boolean verifyPassword(@PathVariable Long id, @RequestBody String currentPassword) {
+        return userService.verifyPassword(id, currentPassword);
+    }
+
+    @PostMapping("/changePassword/{id}")
+    public boolean changeUserPassword(@PathVariable Long id, @RequestBody String newPassword) {
+        return userService.changeUserPassword(id, newPassword);
     }
 }

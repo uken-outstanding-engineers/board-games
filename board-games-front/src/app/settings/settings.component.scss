@@ -8,3 +8,57 @@ img {
     width: 15%;
     height: 15%;
 }
+
+.card-title {
+    padding: 20px 0 15px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #012970;
+    font-family: "Lato", sans-serif;
+}
+
+.profile-overview .label {
+    font-weight: 600;
+    color: rgba(1, 41, 112, 0.6);
+}
+
+.edit {
+    padding: 8px 0;
+}
+
+:host ::ng-deep .row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin: 10px 0 0 0;
+}
+
+// :host ::ng-deep .alert {
+//     width: 208px;
+// }
+
+:host ::ng-deep .p-inputtext {
+    margin: 0;
+    width: 100%;
+}
+
+:host ::ng-deep .p-password {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+}
+
+:host ::ng-deep p-checkbox {
+    display: inline-flex;
+    vertical-align: bottom;
+    align-items: center;
+    width: 45px;
+}

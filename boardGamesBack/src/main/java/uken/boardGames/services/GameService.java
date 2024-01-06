@@ -9,7 +9,7 @@ public interface GameService {
     List<Game> getGames();
     Game saveGame(Game game);
     ResponseEntity<String> deleteGameById(Long id);
-    Game editGame(Long id, Game gameDetails);
+    //Game editGame(Long id, Game gameDetails);
 
     Game findGameById(Long id);
 }

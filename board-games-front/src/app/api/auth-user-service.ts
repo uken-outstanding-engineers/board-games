@@ -14,4 +14,15 @@ export class AuthUserService {
     return this.http.post<any>(`${this.API_URL}/login`, { username, password });
   }
 
+  updateUser(updateUser: any): Observable<any> {
+    return this.http.put(`${this.API_URL}/update/${updateUser.id}`, updateUser);
+  }
+
+  verifyUserPassword(userId: number, currentPassword: string) {
+    return this.http.post(`${this.API_URL}/verifyPassword/${userId}`, currentPassword);
+  }
+
+  changeUserPassword(userId: number, newPassword: string) {
+    return this.http.post(`${this.API_URL}/changePassword/${userId}`, newPassword);
+  }
 }

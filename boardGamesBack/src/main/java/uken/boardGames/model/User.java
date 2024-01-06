@@ -22,6 +22,8 @@ public class User {
     private String passwd;
     @Column(name = "permission")
     private Integer permission;
+    @Column(name = "email")
+    private String email;
     @Column(name = "description")
     private String description;
     @Column(name = "phone")
@@ -31,10 +33,18 @@ public class User {
     @Column(name = "last_login")
     private String lastLogin;
 
-    public String getUsername() {
-        return this.userid;
+    public String getUserid() {return userid;}
+    public void setUserid(String userid) { this.userid = userid;}
+    public String getEmail() {
+        return email;
     }
-    public String getPassword() {
-        return this.passwd;
+    public void setEmail(String email) { this.email = email;}
+    public String getDescription() {
+        return description;
     }
+    public void setDescription(String description) { this.description = description;}
+    public String getPasswd() {
+        return passwd;
+    }
+    public void setPasswd(String passwd) { this.passwd = passwd;}
 }

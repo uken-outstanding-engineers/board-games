@@ -2,6 +2,7 @@ package uken.boardGames.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import uken.boardGames.model.Game;
 import uken.boardGames.model.User;
 import uken.boardGames.repository.UserRepository;
 import uken.boardGames.services.UserService;
@@ -15,37 +16,54 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loginUser(String userid, String passwd) {
-        log.info("Próba logowania dla użytkownika: {}", userid);
         User user = userRepository.findByUserid(userid);
 
-        if (user != null && user.getPassword().equals(passwd)) {
+        if (user != null && user.getPasswd().equals(passwd)) {
             return user;
         } else {
             return null;
         }
     }
 
-    public User createUser(User user) {
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 
-    public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
-    }
-
-    public User updateUser(Long id, User updatedUserDetails) {
+    /*public User updateUser(Long id, User updatedUserDetails) {
         User existingUser = userRepository.findById(id).orElse(null);
 
         if (existingUser != null) {
-            // Tutaj uaktualnij istniejące informacje o użytkowniku na podstawie updatedUserDetails
+            if (updatedUserDetails.getUsername() != null)
+                existingUser.setUsername(updatedUserDetails.getUsername());
+            if (updatedUserDetails.getEmail() != null)
+                existingUser.setEmail(updatedUserDetails.getEmail());
 
             return userRepository.save(existingUser);
         } else {
             return null;
         }
-    }
+    }*/
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public boolean verifyPassword(Long id, String currentPassword) {
+        User user = userRepository.findById(id).orElse(null);
+        return user != null && user.getPasswd().equals(currentPassword);
+    }
+
+    public boolean changeUserPassword(Long id, String newPassword) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setPasswd(newPassword);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
+    public User findUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 }

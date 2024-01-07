@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "games")
 @Getter
@@ -42,6 +45,9 @@ public class Game {
     private Integer gametype2;
     @Column(name = "gametype3")
     private Integer gametype3;
+
+    @OneToMany(mappedBy = "game")
+    List<LikedGame> likedGame;
 
     public Long getId() {
         return id;

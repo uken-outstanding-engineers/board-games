@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class GamesService {
+export class GamesService { 
   private API_URL = 'http://localhost:8080/api/game';
 
   constructor(private http: HttpClient) { }

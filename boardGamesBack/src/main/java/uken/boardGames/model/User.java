@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -32,6 +35,9 @@ public class User {
     private String addr;
     @Column(name = "last_login")
     private String lastLogin;
+
+    @OneToMany(mappedBy = "user")
+    List<LikedGame> likedGame;
 
     public String getUserid() {return userid;}
     public void setUserid(String userid) { this.userid = userid;}

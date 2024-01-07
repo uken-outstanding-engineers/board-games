@@ -14,6 +14,10 @@ export class AuthUserService {
     return this.http.post<any>(`${this.API_URL}/login`, { username, password });
   }
 
+  getUser(userId: number): Observable<any> {
+    return this.http.get(`${this.API_URL}/user/${userId}`);
+  }
+
   updateUser(updateUser: any): Observable<any> {
     return this.http.put(`${this.API_URL}/update/${updateUser.id}`, updateUser);
   }

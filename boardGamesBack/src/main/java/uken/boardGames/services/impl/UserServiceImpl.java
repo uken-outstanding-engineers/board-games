@@ -8,6 +8,8 @@ import uken.boardGames.repository.UserRepository;
 import uken.boardGames.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -24,6 +26,8 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
+
+    public User getUser(Long id) { return findUserById(id); }
 
     public User saveUser(User user) {
         return userRepository.save(user);

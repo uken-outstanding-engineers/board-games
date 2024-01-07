@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import uken.boardGames.model.User;
 import uken.boardGames.services.UserService;
 
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -20,6 +21,11 @@ public class UserController {
 
         //token
         return userService.loginUser(userid, passwd);
+    }
+
+    @GetMapping("/user/{id}")
+    public User getUser(@PathVariable Long id) {
+        return userService.getUser(id);
     }
 
     @PutMapping("/update/{id}")

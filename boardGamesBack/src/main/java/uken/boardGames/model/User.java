@@ -19,8 +19,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "userid")
-    private String userid;
+    @Column(name = "username")
+    private String username;
     @Column(name = "passwd")
     private String passwd;
     @Column(name = "permission")
@@ -39,8 +39,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     List<LikedGame> likedGame;
 
-    public String getUserid() {return userid;}
-    public void setUserid(String userid) { this.userid = userid;}
+    public String getUsername() {return username;}
+    public void setUsername(String username) { this.username = username;}
     public String getEmail() {
         return email;
     }

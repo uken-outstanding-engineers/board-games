@@ -14,7 +14,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class LikedGameKey implements Serializable {
     @Column(name = "user_id")
-    Long userId2;
+    Long userId;
     @Column(name = "game_id")
     Long gameId;
 }

@@ -8,6 +8,7 @@ public interface UserService {
     User getUser(Long id);
     User saveUser(User user);
     //User updateUser(Long id, User updatedUserDetails);
+    void deleteLikedGame(Long userId, Long gameId);
     void deleteUser(Long id);
     boolean verifyPassword(Long id, String currentPassword);
     boolean changeUserPassword(Long id, String newPassword);

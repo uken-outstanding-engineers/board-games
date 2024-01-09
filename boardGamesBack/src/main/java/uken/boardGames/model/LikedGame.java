@@ -22,7 +22,7 @@ public class LikedGame {
     @JsonIgnore
     LikedGameKey id;
     @ManyToOne
-    @MapsId("userId2")
+    @MapsId("userId")
     @JoinColumn(name = "user_id")
     @JsonIgnore
     User user;

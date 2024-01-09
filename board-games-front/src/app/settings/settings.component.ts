@@ -22,6 +22,7 @@ export class SettingsComponent {
   reNewPassword: string = "";
 
   check: boolean | undefined;
+  check2: boolean | undefined;
   
   constructor(
     private tokenStorageService: TokenStorageService, 

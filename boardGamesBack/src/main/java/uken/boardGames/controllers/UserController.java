@@ -33,7 +33,7 @@ public class UserController {
         User existingUser = userService.findUserById(id);
 
         if (existingUser != null) {
-            existingUser.setUserid(userDetails.getUserid());
+            existingUser.setUsername(userDetails.getUsername());
             existingUser.setEmail(userDetails.getEmail());
             existingUser.setDescription(userDetails.getDescription());
 
@@ -41,6 +41,11 @@ public class UserController {
         } else {
             return null;
         }
+    }
+
+    @DeleteMapping("/deleteLikedGames/{userId}/{gameId}")
+    public void deleteLikedGame(@PathVariable Long userId, @PathVariable Long gameId) {
+        userService.deleteLikedGame(userId, gameId);
     }
 
     @PostMapping("/verifyPassword/{id}")

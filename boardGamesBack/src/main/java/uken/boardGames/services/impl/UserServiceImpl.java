@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public User loginUser(String userid, String passwd) {
-        User user = userRepository.findByUserid(userid);
+    public User loginUser(String username, String passwd) {
+        User user = userRepository.findByUsername(username);
 
         if (user != null && user.getPasswd().equals(passwd)) {
             return user;
@@ -50,6 +50,10 @@ public class UserServiceImpl implements UserService {
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public void deleteLikedGame(Long userId, Long gameId) {
+        userRepository.deleteLikedGameByUserIdAndGameId(userId, gameId);
     }
 
     public boolean verifyPassword(Long id, String currentPassword) {

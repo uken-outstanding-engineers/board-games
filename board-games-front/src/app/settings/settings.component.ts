@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TokenStorageService } from '../token-storage.service';
-import { AuthUserService } from '../api/auth-user-service';
+import { AuthUserService } from '../api/user-service';
 import { NavbarComponent } from '../navbar/navbar.component';
 
 
@@ -39,14 +39,14 @@ export class SettingsComponent {
     this.user = this.tokenStorageService.getUserDataFromStorage();
     if (this.user) {
       this.description = this.user.description;
-      this.username = this.user.userid;
+      this.username = this.user.username;
       this.email = this.user.email;
     }
   }
 
   saveUserData(): void {
     if (this.user.id) {
-      this.user.userid = this.username;
+      this.user.username = this.username;
       this.user.email = this.email;
       this.user.description = this.description;
       this.authUserService.updateUser(this.user).subscribe(

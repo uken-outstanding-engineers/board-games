@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LikedGame } from '../api/liked-game';
 import { GamesService } from '../api/game-service';
-import { AuthUserService } from '../api/auth-user-service';
+import { AuthUserService } from '../api/user-service';
 import { TokenStorageService } from '../token-storage.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -13,6 +13,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 export class LikedGamesComponent implements OnInit {
   userId = this.tokenStorageService.getUserDataFromStorage().id;
   likedGame: LikedGame[] = []; 
+  
   isHovered = true;
 
   constructor(
@@ -39,6 +40,17 @@ export class LikedGamesComponent implements OnInit {
       },
       (error) => {
         console.error('Wystąpił błąd podczas pobierania gier planszowych!', error);
+      }
+    );
+  }
+
+  deleteSelectedLikedGame(gameId: number) {
+    this.authUserService.deleteLikedGame(gameId, this.userId).subscribe(
+      (date: any) => {
+        this.likedGame = this.likedGame.filter(lg => lg.game.id !== gameId);
+      },
+      (error: any) => {
+        console.error('Wystąpił błąd podczas usuwania!', error);
       }
     );
   }

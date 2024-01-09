@@ -29,4 +29,8 @@ export class AuthUserService {
   changeUserPassword(userId: number, newPassword: string) {
     return this.http.post(`${this.API_URL}/changePassword/${userId}`, newPassword);
   }
+
+  deleteLikedGame(gameId: number, userId: number): Observable<any> {
+    return this.http.delete(`${this.API_URL}/deleteLikedGames/${userId}/${gameId}`);
+  }
 }

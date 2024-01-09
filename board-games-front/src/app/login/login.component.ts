@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../token-storage.service';
-import { AuthUserService } from '../api/auth-user-service'; 
+import { AuthUserService } from '../api/user-service'; 
 import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
 

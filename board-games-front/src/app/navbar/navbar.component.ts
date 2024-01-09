@@ -67,7 +67,7 @@ export class NavbarComponent implements OnInit {
   }
 
   private updateUsername(): void {
-    this.username = this.tokenStorageService.getUserDataFromStorage().userid;
+    this.username = this.tokenStorageService.getUserDataFromStorage().username;
   }
 
 

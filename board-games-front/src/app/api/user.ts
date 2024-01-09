@@ -1,6 +1,6 @@
 export interface AuthUser {
     id?: number | null;
-    userid?: string;
+    username?: string;
     passwd?: string;
     permisson?: number;
     email? : string;

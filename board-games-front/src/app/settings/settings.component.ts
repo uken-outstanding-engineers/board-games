@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TokenStorageService } from '../token-storage.service';
-import { AuthUserService } from '../api/user-service';
-import { NavbarComponent } from '../navbar/navbar.component';
-
+import { UserService } from '../api/user-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -27,10 +26,10 @@ export class SettingsComponent {
   constructor(
     private tokenStorageService: TokenStorageService, 
     private messageService: MessageService, 
-    private authUserService: AuthUserService,
+    private userService: UserService,
     private confirmationService: ConfirmationService,
-    //private navbarComponent: NavbarComponent
-    ) { }
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loadDataFromTokenStorage();
@@ -48,9 +47,10 @@ export class SettingsComponent {
   saveUserData(): void {
     if (this.user.id) {
       this.user.username = this.username;
+      console.log(this.user.username);
       this.user.email = this.email;
       this.user.description = this.description;
-      this.authUserService.updateUser(this.user).subscribe(
+      this.userService.updateUser(this.user).subscribe(
         (data: any) => {
           this.tokenStorageService.saveUserDataInStorage(data);
         },
@@ -58,11 +58,12 @@ export class SettingsComponent {
           console.error('Błąd podczas aktualizowania użytkownika:', error);
         }
       );
+      window.location.reload(); // Zmienić na coś innego
     }
   }
 
   onVerifyPassword(): void {
-    this.authUserService.verifyUserPassword(this.user.id, this.currentPassword).subscribe(
+    this.userService.verifyUserPassword(this.user.id, this.currentPassword).subscribe(
       (data: any) => {
         console.log(data);
         if(data){
@@ -83,7 +84,7 @@ export class SettingsComponent {
   onChangePassword(): void {
     if(this.newPassword == this.reNewPassword) {
       console.log(this.newPassword);
-      this.authUserService.changeUserPassword(this.user.id, this.newPassword).subscribe(
+      this.userService.changeUserPassword(this.user.id, this.newPassword).subscribe(
           (data: any) => {
             console.log('Hasło zmienione!', data);
             // Dodaj kod obsługujący poprawną zmianę hasła

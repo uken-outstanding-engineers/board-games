@@ -33,6 +33,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    public User registerUser(User newUser) {
+        if (newUser.getPermission() == null) {
+            newUser.setPermission(1);
+        }
+        return userRepository.save(newUser);
+    }
     /*public User updateUser(Long id, User updatedUserDetails) {
         User existingUser = userRepository.findById(id).orElse(null);
 
@@ -47,7 +53,9 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }*/
-
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }

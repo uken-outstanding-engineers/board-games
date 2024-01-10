@@ -39,7 +39,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     List<LikedGame> likedGame;
 
-    public String getUsername() {return username;}
+    public Long getId() { return id;}
+    public String getUsername() { return username;}
     public void setUsername(String username) { this.username = username;}
     public String getEmail() {
         return email;
@@ -53,4 +54,11 @@ public class User {
         return passwd;
     }
     public void setPasswd(String passwd) { this.passwd = passwd;}
+    public Integer getPermission() { return permission;}
+    public void setPermission(Integer permission) { this.permission = permission;}
+    public String getPhone() { return phone;}
+    public String getAddr() { return addr;}
+    public void setAddr(String addr) { this.addr = addr;}
+    public String getLastLogin() { return lastLogin;}
+    public void setLastLogin(String lastLogin) { this.lastLogin = lastLogin;}
 }

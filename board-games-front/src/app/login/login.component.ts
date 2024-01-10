@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../token-storage.service';
-import { AuthUserService } from '../api/user-service'; 
+import { UserService } from '../api/user-service'; 
 import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
 
@@ -17,12 +17,12 @@ export class LoginComponent {
   constructor(
     private http: HttpClient,
     private tokenStorageService: TokenStorageService,
-    private authUserService : AuthUserService,
+    private userService : UserService,
     private router: Router
   ) {}
 
   login(): void {
-    this.authUserService.login(this.username, this.password).subscribe(
+    this.userService.login(this.username, this.password).subscribe(
       (data: any) => {
         if (data !== null) {
           this.tokenStorageService.setToken('twój-token-jwt');

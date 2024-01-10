@@ -20,4 +20,16 @@ public class CommentController {
         return commentService.getComments();
     }
 
+    @PostMapping("/add")
+    public ResponseEntity<Comment> addComment(@RequestBody Comment comment) {
+        try {
+            Comment addedComment = commentService.addComment(comment);
+            return new ResponseEntity<>(addedComment, HttpStatus.CREATED);
+        } catch (Exception e) {
+            // Logowanie błędu lub wyświetlenie komunikatu w konsoli
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

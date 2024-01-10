@@ -10,6 +10,7 @@ public interface GameService {
     Game saveGame(Game game);
     ResponseEntity<String> deleteGameById(Long id);
     //Game editGame(Long id, Game gameDetails);
-
     Game findGameById(Long id);
+    Game incrementLikes(Long id);
+    Game decrementLikes(Long id);
 }

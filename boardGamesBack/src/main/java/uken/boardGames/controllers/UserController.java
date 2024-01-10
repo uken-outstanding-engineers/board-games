@@ -1,6 +1,8 @@
 package uken.boardGames.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uken.boardGames.model.User;
 import uken.boardGames.services.UserService;
@@ -21,6 +23,20 @@ public class UserController {
 
         //token
         return userService.loginUser(userid, passwd);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody User newUser) {
+        try {
+            User registeredUser = userService.registerUser(newUser);
+            return ResponseEntity.ok(registeredUser);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Błąd podczas rejestracji.");
+        }
+    }
+    @GetMapping("/all")
+    public List<User> getAllUsers() {
+        return userService.getUsers();
     }
 
     @GetMapping("/user/{id}")

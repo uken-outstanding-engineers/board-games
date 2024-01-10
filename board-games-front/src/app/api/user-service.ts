@@ -5,13 +5,22 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthUserService {
-    private API_URL = 'http://localhost:8080/api/user';
+export class UserService {
+  private API_URL = 'http://localhost:8080/api/user';
 
   constructor(private http: HttpClient) {}
 
+  getUsers(): Observable<any> {
+    return this.http.get(`${this.API_URL}/all`);
+  }
+
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.API_URL}/login`, { username, password });
+  }
+
+  register(newUsername: string, newEmail: string, newPassword: string, permission: number): Observable<any> {
+    const newUser = { username: newUsername, passwd: newPassword, permission: permission, email: newEmail };
+    return this.http.post<any>(`${this.API_URL}/register`, newUser);
   }
 
   getUser(userId: number): Observable<any> {

@@ -1,3 +1,23 @@
-<!-- <div *ngFor="let comment of comments">
-    <div>{{ comment.comment }}</div>
-</div> -->
+<div *ngIf="showUsersPanel"></div>
+
+
+<form (ngSubmit)="addComment(actualUser.id)">
+  <input type="text" placeholder="Dodaj komentarz" [(ngModel)]="newComment" name="newComment" required>
+  <button type="submit">Dodaj</button>
+</form>
+
+
+<div *ngFor="let user of users">
+  <div class="card" *ngIf="userHasComments(user?.id)">
+    <img [src]="'//ssl.gstatic.com/accounts/ui/avatar_2x.png'" [alt]="'avatar'"/>
+    <div class="container">
+      <h2>{{ user.username }}</h2>
+      <div *ngFor="let comment of getUserComments(user?.id)">
+        {{ comment.comment }}
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+

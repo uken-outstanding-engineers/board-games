@@ -28,9 +28,6 @@ export class HomeSiteComponent implements OnInit{
 
     submitted: boolean = false;
 
-    //statuses!: any[];
-    //https: any;
-
     constructor(private GamesService: GamesService, private CategoryService: CategoryService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
 
     ngOnInit() {

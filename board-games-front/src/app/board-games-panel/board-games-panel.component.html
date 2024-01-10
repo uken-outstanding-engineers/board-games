@@ -82,6 +82,7 @@
 <p-dialog [(visible)]="gameDialog" [style]="{ width: '450px' }" header="Gra planszowa" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <img [src]="'assets/images/' + game.img" [alt]="game.title" [style]="{ width: '250px', height: '250px' }" class="block m-auto pb-3" *ngIf="game.img" />
+        <p-fileUpload mode="basic" chooseLabel="Zdjęcie" name="gameImage[]" accept="image/*" [maxFileSize]="2097152" (onSelect)="onGameImageFileChange($event)"></p-fileUpload>
         <div class="field">
             <label for="title">Tytuł</label>
             <input type="text" pInputText id="Title" [(ngModel)]="game.title" required autofocus />

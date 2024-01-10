@@ -1,0 +1,13 @@
+<div class="gallery">
+    <div class="image-container" *ngFor="let game of games">
+      <img [src]="getImagePath(game)" alt="{{ game.shortDescription }}" (click)="openModal(game)" />
+    </div>
+  </div>
+  
+  <!-- Simple Modal -->
+  <div class="modal" *ngIf="modalOpened">
+    <div class="modal-content">
+      <img *ngIf="selectedGame" [src]="getImagePath(selectedGame)" alt="{{ selectedGame.shortDescription }}" class="img-fluid" />
+      <button class="close-btn" (click)="closeModal()">Close</button>
+    </div>
+  </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LikedGame } from '../api/liked-game';
 import { GamesService } from '../api/game-service';
-import { AuthUserService } from '../api/user-service';
+import { UserService } from '../api/user-service';
 import { TokenStorageService } from '../token-storage.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -19,13 +19,13 @@ export class LikedGamesComponent implements OnInit {
   constructor(
     private gamesService: GamesService,
     private messageService: MessageService, 
-    private authUserService: AuthUserService,
+    private userService: UserService,
     private tokenStorageService: TokenStorageService,
     private confirmationService: ConfirmationService,
   ) {}
 
   ngOnInit() {
-    this.authUserService.getUser(this.userId).subscribe(
+    this.userService.getUser(this.userId).subscribe(
       (data: any) => {
         this.likedGame = data.likedGame;
 
@@ -45,7 +45,7 @@ export class LikedGamesComponent implements OnInit {
   }
 
   deleteSelectedLikedGame(gameId: number) {
-    this.authUserService.deleteLikedGame(gameId, this.userId).subscribe(
+    this.userService.deleteLikedGame(gameId, this.userId).subscribe(
       (date: any) => {
         this.likedGame = this.likedGame.filter(lg => lg.game.id !== gameId);
       },

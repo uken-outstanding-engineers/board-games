@@ -66,4 +66,6 @@ public class Game {
     public void setAge(Integer age) { this.age = age;}
     public Double getPrice() { return price;}
     public void setPrice(Double price) { this.price = price;}
+    public void setLikes(Integer likes) { this.likes = likes;}
+    public Integer getLikes() { return likes;}
 }

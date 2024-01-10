@@ -48,6 +48,26 @@ public class GameServiceImpl implements GameService {
         gameRepository.deleteById(id);
         return null;
     }
+
+    public Game incrementLikes(Long id) {
+        Game game = gameRepository.findById(id).orElse(null);
+
+        if (game != null) {
+            game.setLikes((game.getLikes() != null ? game.getLikes() : 0) + 1);
+            return gameRepository.save(game);
+        }
+        return null;
+    }
+    public Game decrementLikes(Long id) {
+        Game game = gameRepository.findById(id).orElse(null);
+
+        if (game != null) {
+            int likes = (game.getLikes() != null ? game.getLikes() : 0);
+            game.setLikes(likes > 0 ? likes - 1 : 0);
+            return gameRepository.save(game);
+        }
+        return null;
+    }
     public Game findGameById(Long id) {
         return gameRepository.findById(id).orElse(null);
     }

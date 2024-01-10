@@ -1,4 +1,4 @@
-export interface AuthUser {
+export interface User {
     id?: number | null;
     username?: string;
     passwd?: string;

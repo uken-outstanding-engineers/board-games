@@ -52,6 +52,7 @@ import { HomeSiteComponent } from './home-site/home-site.component';
 import { LikedGamesComponent } from './liked-games/liked-games.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CommentListComponent } from './comment-list/comment-list.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { CommentListComponent } from './comment-list/comment-list.component';
     LikedGamesComponent,
     SettingsComponent,
     CommentListComponent,
+    GalleryComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,4 +25,24 @@ export class GamesService {
   updateGame(updatedGame: any): Observable<any> {
     return this.http.put(`${this.API_URL}/edit/${updatedGame.id}`, updatedGame);
   }
+
+  uploadGameImage(gameId: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(`${this.API_URL}/uploadImage/${gameId}`, formData);
+  }
+
+  getGameDetails(gameId: number): Observable<any> {
+    return this.http.get(`${this.API_URL}/details/${gameId}`);
+  }
+  
+  incrementLikes(gameId: number): Observable<any> {
+    return this.http.put(`${this.API_URL}/update-likes/${gameId}`, {});
+  }
+
+  decrementLikes(gameId: number): Observable<any> {
+    return this.http.put(`${this.API_URL}/update-dislikes/${gameId}`, {});
+  }
+
 }

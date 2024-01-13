@@ -27,7 +27,12 @@ export class BoardGamesPanelComponent implements OnInit{
 
     uploadedFile: File | undefined;
 
-    constructor(private gamesService: GamesService, private categoryService: CategoryService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
+    constructor(
+      private gamesService: GamesService, 
+      private categoryService: CategoryService, 
+      private messageService: MessageService, 
+      private confirmationService: ConfirmationService
+    ) {}
 
     ngOnInit() {
 
@@ -98,23 +103,23 @@ export class BoardGamesPanelComponent implements OnInit{
         const id = game.id ?? -1;
         
         this.confirmationService.confirm({
-            message: 'Czy na pewno chcesz usunąć ' + game.title + '?', 
-            header: 'Potwierdź',
-            icon: 'pi pi-exclamation-triangle',
-            acceptLabel: 'Tak',
-            rejectLabel: 'Nie',
-            accept: () => {
-                this.gamesService.deleteGame(id).subscribe(
-                  () => {
-                    this.games = this.games.filter((val) => val.id !== game.id);
-                    this.game = {};
-                    this.messageService.add({ severity: 'success', summary: 'Operacja zakończona sukcesem', detail: 'Gra została usunięta', life: 3000 });
-                  },
-                  (error: any) => {
-                    console.error('Błąd podczas usuwania gry:', error);
-                  }
-                );
+          message: 'Czy na pewno chcesz usunąć ' + game.title + '?', 
+          header: 'Potwierdź',
+          icon: 'pi pi-exclamation-triangle',
+          acceptLabel: 'Tak',
+          rejectLabel: 'Nie',
+          accept: () => {
+            this.gamesService.deleteGame(id).subscribe(
+              () => {
+                this.games = this.games.filter((val) => val.id !== game.id);
+                this.game = {};
+                this.messageService.add({ severity: 'success', summary: 'Operacja zakończona sukcesem', detail: 'Gra została usunięta', life: 3000 });
+              },
+              (error: any) => {
+                console.error('Błąd podczas usuwania gry:', error);
               }
+            );
+          }
         });
     }
 

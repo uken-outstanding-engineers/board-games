@@ -26,6 +26,11 @@
                                     <div class="col-lg-4 col-md-6  label">E-mail:</div>
                                     <div class="col-lg-8 col-md-6">{{ user.email }}</div>
                                 </div>
+                                <div class="mt-5 text-center">
+                                    <p-toast></p-toast>
+                                    <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+                                    <button type="button" pButton pRipple (click)="deleteUser(user.id)" label="Usuń konto" class="p-button-danger delete"></button>
+                                </div>
                             </div>
                         </div>
                     </p-tabPanel>
@@ -36,10 +41,10 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-md-6 label edit">Opis:</div>
                                         <div class="col-lg-8 col-md-6">
-                                            <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="description" name="description" required maxlength="255"></textarea>
-                                            <div class="alert alert-danger" role="alert" *ngIf="!description">
+                                            <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="description" name="description" maxlength="255"></textarea>
+                                            <!-- <div class="alert alert-danger" role="alert" *ngIf="!description">
                                                 Pole nie może być puste!
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>       
                                     <div class="row">

@@ -5,7 +5,10 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class GamesService { 
+export class GamesService {
+  addLikedGame(arg0: number, userId: any) {
+    throw new Error('Method not implemented.');
+  } 
   private API_URL = 'http://localhost:8080/api/game';
 
   constructor(private http: HttpClient) { }

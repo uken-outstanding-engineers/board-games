@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = !!this.tokenStorageService.getToken();        
       this.updateMenuItems();
     });
+    this.updateUser();
   }
 
   private updateMenuItems(): void {
@@ -33,7 +34,7 @@ export class NavbarComponent implements OnInit {
       this.updateUser();
       this.menuItems = [
         {
-          label: this.username,
+          label: this.tokenStorageService.getUserDataFromStorage().username,
           items: [
             {
               label: 'Polubione',
@@ -70,7 +71,9 @@ export class NavbarComponent implements OnInit {
   }
 
   private updateUser(): void {
-    this.username = this.tokenStorageService.getUserDataFromStorage().username;
+    if (this.username)
+      this.username = this.tokenStorageService.getUserDataFromStorage().username;
+
     this.permission = this.tokenStorageService.getUserDataFromStorage().permission;
   }
 

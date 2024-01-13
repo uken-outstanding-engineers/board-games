@@ -47,7 +47,7 @@ export class SettingsComponent {
   saveUserData(): void {
     if (this.user.id) {
       this.user.username = this.username;
-      console.log(this.user.username);
+      //console.log(this.user.username);
       this.user.email = this.email;
       this.user.description = this.description;
       this.userService.updateUser(this.user).subscribe(
@@ -58,7 +58,7 @@ export class SettingsComponent {
           console.error('Błąd podczas aktualizowania użytkownika:', error);
         }
       );
-      window.location.reload(); // Zmienić na coś innego
+      //window.location.reload(); // Zmienić na coś innego
     }
   }
 
@@ -100,5 +100,27 @@ export class SettingsComponent {
       // Dodaj kod obsługujący błędy
     }
   }
-  
+
+  deleteUser(userId: number) {
+    this.confirmationService.confirm({
+      message: 'Czy na pewno chcesz usunąć konto?', 
+      header: 'Potwierdź',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Tak',
+      rejectLabel: 'Nie',
+      accept: () => {
+        this.userService.deleteUser(userId).subscribe(
+          () => {
+            console.log('User deleted successfully.');
+            this.tokenStorageService.removeToken(); 
+            this.tokenStorageService.setLoggedIn(false);
+            this.router.navigate(['/']);
+          },
+          (error: any) => {
+            console.error('Error deleting user:', error);
+          }
+        );
+      }
+    });
+  }
 }

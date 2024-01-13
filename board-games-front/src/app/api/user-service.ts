@@ -31,6 +31,10 @@ export class UserService {
     return this.http.put(`${this.API_URL}/update/${updateUser.id}`, updateUser);
   }
 
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/delete/${id}`);
+  }
+
   verifyUserPassword(userId: number, currentPassword: string) {
     return this.http.post(`${this.API_URL}/verifyPassword/${userId}`, currentPassword);
   }
@@ -41,5 +45,10 @@ export class UserService {
 
   deleteLikedGame(gameId: number, userId: number): Observable<any> {
     return this.http.delete(`${this.API_URL}/deleteLikedGames/${userId}/${gameId}`);
+  }
+
+  addLikedGame(gameId: number, userId: number): Observable<any> {
+    const likedGame = { userId, gameId };
+    return this.http.post<any>(`${this.API_URL}/addLikedGame`, likedGame);
   }
 }

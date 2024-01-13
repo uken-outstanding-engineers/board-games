@@ -4,9 +4,9 @@
   <div class="game-info">
     <h1 class="game-title">{{game.title}}</h1>
     <p class="game-description">{{game.shortDescription}}</p>
-    <p-rating [cancel]="false"></p-rating>
+    <!-- <p-rating [cancel]="false"></p-rating> -->
     <div class="game-rating">      
-    <span class="rating-value"></span>
+      <span class="rating-value"></span>
     </div>  
   <div class="requirements-container">
     <table class="requirements-table">
@@ -28,9 +28,10 @@
       </tr>
     </table>             
   </div>
-  </div>
+  <div class="pbutton">
   <button pButton type="button" icon="pi pi-heart" (click)="handleLike()" severity="help"></button>
-  <p>{{ game.likes }}</p>
+  </div>
+  </div>
 </div>
 
 <div class="ogolne">
@@ -53,7 +54,3 @@
   </p-tabPanel>
 </p-tabView>
 </div>
-
-
-
-

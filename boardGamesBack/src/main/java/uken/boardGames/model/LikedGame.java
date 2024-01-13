@@ -1,5 +1,6 @@
 package uken.boardGames.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -33,4 +34,17 @@ public class LikedGame {
     Game game;
     @Column(name = "date")
     private Date date;
+    public LikedGameKey getId() { return id;}
+    public void setId(LikedGameKey id) {
+        this.id = id;
+    }
+    //public void setId(Long userId, Long gameId) { this.id = }
+    public Long getUserId() { return this.getUserId();}
+    public void setUserId(Long userId) { this.setUserId(userId);}
+    public Long getGameId() { return this.getGameId();}
+    public void setGameId(Long gameId) { this.setGameId(gameId);}
+    public Date getDate() { return date;}
+    public void setDate(Date date) { this.date = date;}
+
 }
+

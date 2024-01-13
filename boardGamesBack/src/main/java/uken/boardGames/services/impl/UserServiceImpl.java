@@ -2,12 +2,15 @@ package uken.boardGames.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uken.boardGames.model.Game;
+import uken.boardGames.key.LikedGameKey;
+import uken.boardGames.model.LikedGame;
 import uken.boardGames.model.User;
+import uken.boardGames.repository.LikedGameRepository;
 import uken.boardGames.repository.UserRepository;
 import uken.boardGames.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -15,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final LikedGameRepository likedGameRepository;
 
     @Override
     public User loginUser(String username, String passwd) {
@@ -62,6 +66,18 @@ public class UserServiceImpl implements UserService {
 
     public void deleteLikedGame(Long userId, Long gameId) {
         userRepository.deleteLikedGameByUserIdAndGameId(userId, gameId);
+    }
+
+    public void addLikedGame(Long userId, Long gameId) {
+        LikedGameKey likedGameKey = new LikedGameKey();
+        LikedGame likedGame = new LikedGame();
+
+        likedGameKey.setUserId(userId);
+        likedGameKey.setGameId(gameId);
+        likedGame.setId(likedGameKey);
+        likedGame.setDate(null);
+
+        likedGameRepository.save(likedGame);
     }
 
     public boolean verifyPassword(Long id, String currentPassword) {

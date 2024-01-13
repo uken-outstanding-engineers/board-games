@@ -17,4 +17,9 @@ public class LikedGameKey implements Serializable {
     Long userId;
     @Column(name = "game_id")
     Long gameId;
+
+    public Long getUserId() { return userId;}
+    public void setUserId(Long userId) { this.userId = userId;}
+    public Long getGameId() { return gameId;}
+    public void setGameId(Long gameId) {this.gameId = gameId;}
 }

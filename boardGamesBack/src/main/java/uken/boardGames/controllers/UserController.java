@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uken.boardGames.key.LikedGameKey;
+import uken.boardGames.model.LikedGame;
 import uken.boardGames.model.User;
 import uken.boardGames.services.UserService;
 
@@ -57,6 +59,15 @@ public class UserController {
         } else {
             return null;
         }
+    }
+    @DeleteMapping("/delete/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+    }
+
+    @PostMapping("/addLikedGame")
+    public void addLikedGame(@RequestBody LikedGame likedGameDetails) {
+        userService.addLikedGame(likedGameDetails.getUserId(), likedGameDetails.getGameId());
     }
 
     @DeleteMapping("/deleteLikedGames/{userId}/{gameId}")

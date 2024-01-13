@@ -51,8 +51,8 @@ public class GameController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteGame(@PathVariable Long id) {
-        return gameService.deleteGameById(id);
+    public void deleteGame(@PathVariable Long id) {
+        gameService.deleteGameById(id);
     }
 
     @PutMapping("/update-likes/{id}")

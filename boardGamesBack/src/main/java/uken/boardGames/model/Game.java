@@ -1,5 +1,8 @@
 package uken.boardGames.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -46,8 +49,11 @@ public class Game {
     @Column(name = "gametype3")
     private Integer gametype3;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "game")
     List<LikedGame> likedGame;
+    @OneToMany(mappedBy = "game")
+    List<Comment> comment;
 
     public Long getId() {
         return id;

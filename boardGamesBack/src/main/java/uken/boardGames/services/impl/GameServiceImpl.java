@@ -44,9 +44,8 @@ public class GameServiceImpl implements GameService {
             return null;
         }
     }*/
-    public ResponseEntity<String> deleteGameById(Long id) {
+    public void deleteGameById(Long id) {
         gameRepository.deleteById(id);
-        return null;
     }
 
     public Game incrementLikes(Long id) {

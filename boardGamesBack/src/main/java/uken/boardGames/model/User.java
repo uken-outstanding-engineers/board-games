@@ -39,6 +39,7 @@ public class User {
     @Column(name = "last_login")
     private String lastLogin;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     List<LikedGame> likedGame;
     @JsonIgnore
@@ -67,4 +68,13 @@ public class User {
     public void setAddr(String addr) { this.addr = addr;}
     public String getLastLogin() { return lastLogin;}
     public void setLastLogin(String lastLogin) { this.lastLogin = lastLogin;}
+
+    public List<LikedGame> getLikedGame() {
+        return likedGame;
+    }
+    public void setLikedGame(List<LikedGame> likedGame) {
+        this.likedGame = likedGame;
+    }
+    public List<Comment> getComment() {return comment;}
+    public void setComment(List<Comment> comment) {this.comment = comment;}
 }

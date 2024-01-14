@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uken.boardGames.dto.UserDTO;
 import uken.boardGames.key.LikedGameKey;
 import uken.boardGames.model.LikedGame;
 import uken.boardGames.model.User;
@@ -42,7 +43,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public User getUser(@PathVariable Long id) {
+    public UserDTO getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
 

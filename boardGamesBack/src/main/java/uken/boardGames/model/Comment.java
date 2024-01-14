@@ -9,7 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import uken.boardGames.key.CommentKey;
+import uken.boardGames.key.LikedGameKey;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,18 +24,29 @@ public class Comment {
     @EmbeddedId
     @JsonIgnore
     CommentKey id;
-    @JsonBackReference
+
     @ManyToOne
     @MapsId("idUsers")
     @JoinColumn(name = "id_users")
-    @JsonIgnoreProperties({"comment", "likedGame"})
     User user;
-    @JsonBackReference
+
     @ManyToOne
     @MapsId("idGames")
     @JoinColumn(name = "id_games")
-    @JsonIgnore
     Game game;
     @Column(name = "comment")
     private String comment;
+
+    public CommentKey getId() { return id;}
+    public void setId(CommentKey id) {
+        this.id = id;
+    }
+    public Long getUserId() { return user.getId();}
+    public void setUserId(Long userId) { this.setUserId(userId);}
+    public Long getGameId() { return game.getId();}
+    public void setGameId(Long gameId) { this.setGameId(gameId);}
+    public String getComment() { return comment;}
+    public void setComment(String comment) { this.comment = comment;}
+    public User getUser() { return user;}
+    public Game getGame() {return game;}
 }

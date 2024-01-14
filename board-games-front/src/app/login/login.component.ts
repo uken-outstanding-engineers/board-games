@@ -36,7 +36,7 @@ export class LoginComponent {
         }
       },
       (error) => {
-        console.log('Błąd logowania. Niepoprawna nazwa użytkownika lub hasło.', error);
+        console.log('Błąd logowania.', error);
         this.tokenStorageService.setLoggedIn(false); 
       }
     );

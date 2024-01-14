@@ -19,7 +19,7 @@ public class LikedGameKey implements Serializable {
     Long gameId;
 
     public Long getUserId() { return userId;}
-    public void setUserId(Long userId) { this.userId = userId;}
     public Long getGameId() { return gameId;}
+    public void setUserId(Long userId) { this.userId = userId;}
     public void setGameId(Long gameId) {this.gameId = gameId;}
 }

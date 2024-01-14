@@ -23,6 +23,13 @@ public class GameController {
         return gameService.getGames();
     }
 
+    /*@GetMapping("/{id}")
+    public GameDTO getGameById(@PathVariable Long id) {
+        Game game = gameService.findGameById(id);
+        GameDTO gameDTO = gameMapper.gameToGameDTO(game);
+        return gameDTO;
+    }*/
+
     @PostMapping("/add")
     public Game addGame(@RequestBody Game game) { return gameService.saveGame(game); }
 

@@ -2,10 +2,12 @@ package uken.boardGames.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import uken.boardGames.dto.UserDTO;
 import uken.boardGames.key.LikedGameKey;
 import uken.boardGames.model.LikedGame;
 import uken.boardGames.model.User;
 import uken.boardGames.repository.LikedGameRepository;
+import uken.boardGames.mapper.UserMapper;
 import uken.boardGames.repository.UserRepository;
 import uken.boardGames.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +21,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final LikedGameRepository likedGameRepository;
-
+    private final UserMapper userMapper;
     @Override
     public User loginUser(String username, String passwd) {
         User user = userRepository.findByUsername(username);
@@ -31,7 +33,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public User getUser(Long id) { return findUserById(id); }
+    //public User getUser(Long id) { return findUserById(id); }
+    public UserDTO getUser(Long id) {
+        User user = findUserById(id);
+        List<LikedGame> likedGames = user.getLikedGame();
+
+        UserDTO userDTO = userMapper.userToUserDTO(user);
+        userDTO.setLikedGame(userMapper.likedGamesToLikedGameDTO(user.getLikedGame()));
+
+
+        return userDTO;
+    }
 
     public User saveUser(User user) {
         return userRepository.save(user);

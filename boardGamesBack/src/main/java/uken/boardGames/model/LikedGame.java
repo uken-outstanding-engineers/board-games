@@ -30,21 +30,22 @@ public class LikedGame {
     @ManyToOne
     @MapsId("gameId")
     @JoinColumn(name = "game_id")
-    @JsonIgnoreProperties("likedGame")
+    @JsonIgnore
     Game game;
     @Column(name = "date")
     private Date date;
+
     public LikedGameKey getId() { return id;}
     public void setId(LikedGameKey id) {
         this.id = id;
     }
-    //public void setId(Long userId, Long gameId) { this.id = }
     public Long getUserId() { return this.getUserId();}
     public void setUserId(Long userId) { this.setUserId(userId);}
     public Long getGameId() { return this.getGameId();}
     public void setGameId(Long gameId) { this.setGameId(gameId);}
     public Date getDate() { return date;}
     public void setDate(Date date) { this.date = date;}
-
+    public User getUser() { return user;}
+    public Game getGame() {return game;}
 }
 

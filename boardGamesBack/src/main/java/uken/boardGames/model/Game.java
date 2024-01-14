@@ -52,6 +52,7 @@ public class Game {
     @JsonIgnore
     @OneToMany(mappedBy = "game")
     List<LikedGame> likedGame;
+    @JsonIgnore
     @OneToMany(mappedBy = "game")
     List<Comment> comment;
 
@@ -74,4 +75,8 @@ public class Game {
     public void setPrice(Double price) { this.price = price;}
     public void setLikes(Integer likes) { this.likes = likes;}
     public Integer getLikes() { return likes;}
+    public String getImg() { return img;}
+    public List<Comment> getComment() {return comment;}
+    public void setComment(List<Comment> comment) {this.comment = comment;}
 }
+

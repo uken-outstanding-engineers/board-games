@@ -1,6 +1,5 @@
 package uken.boardGames.services;
 
-import org.springframework.http.ResponseEntity;
 import uken.boardGames.model.Game;
 
 import java.util.List;

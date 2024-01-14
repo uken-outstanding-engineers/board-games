@@ -17,4 +17,9 @@ public class CommentKey implements Serializable {
     Long idUsers;
     @Column(name = "id_games")
     Long idGames;
+
+    public Long getIdUsers() {return idUsers;}
+    public Long getIdGames() {return idGames;}
+    public void setIdUsers(Long idUsers) {this.idUsers = idUsers;}
+    public void setIdGames(Long idGames) {this.idGames = idGames;}
 }

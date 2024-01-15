@@ -75,6 +75,7 @@ public class Game {
     public void setPrice(Double price) { this.price = price;}
     public void setLikes(Integer likes) { this.likes = likes;}
     public Integer getLikes() { return likes;}
+    public void setImg(String img) { this.img = img;}
     public String getImg() { return img;}
     public List<Comment> getComment() {return comment;}
     public void setComment(List<Comment> comment) {this.comment = comment;}

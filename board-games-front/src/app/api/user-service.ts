@@ -49,6 +49,7 @@ export class UserService {
 
   addLikedGame(gameId: number, userId: number): Observable<any> {
     const likedGame = { userId, gameId };
+    console.log(likedGame);
     return this.http.post<any>(`${this.API_URL}/addLikedGame`, likedGame);
   }
 }

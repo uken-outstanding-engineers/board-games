@@ -67,7 +67,7 @@ public class UserController {
     }
 
     @PostMapping("/addLikedGame")
-    public void addLikedGame(@RequestBody LikedGame likedGameDetails) {
+    public void addLikedGame(@RequestBody LikedGameKey likedGameDetails) {
         userService.addLikedGame(likedGameDetails.getUserId(), likedGameDetails.getGameId());
     }
 

@@ -31,14 +31,14 @@ export class CommentListComponent implements OnInit {
       }
     );
 
-    this.userService.getUsers().subscribe(
+    /*this.userService.getUsers().subscribe(
       (data: User[]) => {
         this.users = data;
       },
       (error) => {
         console.error('Wystąpił błąd podczas pobierania użytkowników!', error);
       }
-    );
+    );*/
   }
 
   userHasComments(userId: number | null | undefined): boolean {

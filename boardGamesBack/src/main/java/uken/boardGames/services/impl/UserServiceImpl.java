@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uken.boardGames.dto.UserDTO;
 import uken.boardGames.key.LikedGameKey;
+import uken.boardGames.model.Game;
 import uken.boardGames.model.LikedGame;
 import uken.boardGames.model.User;
 import uken.boardGames.repository.LikedGameRepository;
 import uken.boardGames.mapper.UserMapper;
 import uken.boardGames.repository.UserRepository;
+import uken.boardGames.repository.GameRepository;
 import uken.boardGames.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final GameRepository gameRepository;
     private final LikedGameRepository likedGameRepository;
     private final UserMapper userMapper;
     @Override
@@ -81,14 +84,16 @@ public class UserServiceImpl implements UserService {
     }
 
     public void addLikedGame(Long userId, Long gameId) {
-        LikedGameKey likedGameKey = new LikedGameKey();
-        LikedGame likedGame = new LikedGame();
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        Game game = gameRepository.findById(gameId).orElseThrow(() -> new IllegalArgumentException("Game not found"));
 
-        likedGameKey.setUserId(userId);
-        likedGameKey.setGameId(gameId);
-        likedGame.setId(likedGameKey);
-        likedGame.setDate(null);
+        LikedGameKey likedGameKey = new LikedGameKey(userId, gameId);
 
+        if (likedGameRepository.findById(likedGameKey).isPresent()) {
+            throw new IllegalArgumentException("LikedGame entry already exists");
+        }
+
+        LikedGame likedGame = new LikedGame(likedGameKey, user, game, new Date());
         likedGameRepository.save(likedGame);
     }
 

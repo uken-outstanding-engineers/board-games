@@ -1,15 +1,21 @@
 package uken.boardGames.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import uken.boardGames.model.Game;
 import uken.boardGames.services.GameService;
+import org.springframework.util.StringUtils;
+
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -22,13 +28,6 @@ public class GameController {
     public List<Game> getAllGames() {
         return gameService.getGames();
     }
-
-    /*@GetMapping("/{id}")
-    public GameDTO getGameById(@PathVariable Long id) {
-        Game game = gameService.findGameById(id);
-        GameDTO gameDTO = gameMapper.gameToGameDTO(game);
-        return gameDTO;
-    }*/
 
     @PostMapping("/add")
     public Game addGame(@RequestBody Game game) { return gameService.saveGame(game); }
@@ -52,10 +51,34 @@ public class GameController {
     }
 
     @PostMapping("/uploadImage/{gameId}")
-    public void uploadGameImage(@PathVariable Long gameId, @RequestParam("file") MultipartFile file) throws IOException {
-        String filePath = "assets/gameImages/" + gameId + "_" + file.getOriginalFilename();
-        file.transferTo(new File(filePath));
+    public ResponseEntity<String> uploadGameImage(@PathVariable Long gameId, @RequestParam("file") MultipartFile file) {
+        try {
+            String uploadDirectory = "C:/Users/Admin/board-games/board-games-front/src/assets/images/";
+            String fileExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+            String imgPath = "p" + gameId + "." + fileExtension;
+            String filePath = uploadDirectory + imgPath;
+
+            Path directoryPath = Paths.get(uploadDirectory);
+            Files.createDirectories(directoryPath);
+
+            Game existingGame = gameService.findGameById(gameId);
+
+            if (existingGame != null) {
+                existingGame.setImg(imgPath);
+                gameService.saveGame(existingGame);
+            }
+
+            file.transferTo(new File(filePath));
+            return ResponseEntity.ok("Plik został zapisany pomyślnie.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Błąd podczas zapisywania pliku.");
+        }
     }
+    /*public void uploadGameImage(@PathVariable Long gameId, @RequestParam("file") MultipartFile file) throws IOException {
+        String filePath = "C:/Users/Admin/board-games/board-games-front/src/assets/images" + gameId + "_" + file.getOriginalFilename();
+        file.transferTo(new File(filePath));
+    }*/
 
     @DeleteMapping("/delete/{id}")
     public void deleteGame(@PathVariable Long id) {

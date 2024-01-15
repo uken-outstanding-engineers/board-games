@@ -5,14 +5,16 @@ import java.util.List;
 import javax.annotation.processing.Generated;
 import uken.boardGames.dto.GameDTO;
 import uken.boardGames.dto.LikedGameDTO;
+import uken.boardGames.dto.LikedGameKeyDTO;
 import uken.boardGames.dto.UserDTO;
+import uken.boardGames.key.LikedGameKey;
 import uken.boardGames.model.Game;
 import uken.boardGames.model.LikedGame;
 import uken.boardGames.model.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-14T19:20:30+0100",
+    date = "2024-01-15T11:08:42+0100",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.5.jar, environment: Java 17.0.6 (BellSoft)"
 )
 public class UserMapperImpl implements UserMapper {
@@ -65,6 +67,19 @@ public class UserMapperImpl implements UserMapper {
         return list;
     }
 
+    protected LikedGameKeyDTO likedGameKeyToLikedGameKeyDTO(LikedGameKey likedGameKey) {
+        if ( likedGameKey == null ) {
+            return null;
+        }
+
+        LikedGameKeyDTO likedGameKeyDTO = new LikedGameKeyDTO();
+
+        likedGameKeyDTO.setUserId( likedGameKey.getUserId() );
+        likedGameKeyDTO.setGameId( likedGameKey.getGameId() );
+
+        return likedGameKeyDTO;
+    }
+
     protected LikedGameDTO likedGameToLikedGameDTO(LikedGame likedGame) {
         if ( likedGame == null ) {
             return null;
@@ -75,6 +90,7 @@ public class UserMapperImpl implements UserMapper {
         likedGameDTO.setUser( userToUserDTO( likedGame.getUser() ) );
         likedGameDTO.setGame( gameToGameDTO( likedGame.getGame() ) );
         likedGameDTO.setDate( likedGame.getDate() );
+        likedGameDTO.setId( likedGameKeyToLikedGameKeyDTO( likedGame.getId() ) );
 
         return likedGameDTO;
     }

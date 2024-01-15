@@ -102,6 +102,14 @@ export class GameDetailsComponent implements OnInit {
             console.error('Wystąpił błąd podczas aktualizacji gry!', error);
           }
         );
+        this.userService.deleteLikedGame(this.game.id!, this.userId!).subscribe(
+          (date: any) => {
+            // Pomyślnie usunięto grę
+          },
+          (error: any) => {
+            console.error('Wystąpił błąd podczas usuwania!', error);
+          }
+        );
       }
     } else {
       console.error('Brak dostępu do identyfikatora gry.');

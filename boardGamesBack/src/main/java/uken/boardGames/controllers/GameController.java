@@ -30,7 +30,10 @@ public class GameController {
     }
 
     @PostMapping("/add")
-    public Game addGame(@RequestBody Game game) { return gameService.saveGame(game); }
+    public Game addGame(@RequestBody Game game) {
+        System.out.println(game.getShortDescription());
+        System.out.println(game.getLongDescription());
+        return gameService.saveGame(game); }
 
     @PutMapping("/edit/{id}")
     public Game editGame(@PathVariable Long id, @RequestBody Game gameDetails) {

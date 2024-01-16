@@ -34,7 +34,7 @@ public class Game {
     private Double price;
     @Column(name = "reference")
     private String reference;
-    @Column(name = "longDescription")
+    @Column(name = "long_description")
     private String longDescription;
     @Column(name = "max_players")
     private Integer maxPlayers;
@@ -64,7 +64,7 @@ public class Game {
     public String getShortDescription() {return shortDescription;}
     public void setShortDescription(String shortDescription) {this.shortDescription = shortDescription;}
     public String getLongDescription() {return longDescription;}
-    public void setLongDescription(String long_description) {this.longDescription = longDescription;}
+    public void setLongDescription(String longDescription) {this.longDescription = longDescription;}
     public Integer getPublished() { return published;}
     public void setPublished(Integer published) { this.published = published;}
     public Integer getMaxPlayers() { return maxPlayers;}

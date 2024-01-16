@@ -90,12 +90,12 @@
         </div>
         <div class="field">
             <label for="short_description">Krtótki Opis</label>
-            <textarea id="short_description" pInputTextarea [(ngModel)]="game.shortDescription" required rows="3" cols="20"></textarea>
+            <textarea type="text" id="shortDescription" pInputTextarea [(ngModel)]="game.shortDescription" required rows="3" cols="20"></textarea>
             <small class="p-error" *ngIf="submitted && !game.shortDescription">Krtótki opis jest wymagany.</small>
         </div>
         <div class="field">
             <label for="long_description">Długi Opis</label>
-            <textarea id="long_description" pInputTextarea [(ngModel)]="game.longDescription" required rows="3" cols="20"></textarea>
+            <textarea type="text" id="longDescription" pInputTextarea [(ngModel)]="game.longDescription" required rows="3" cols="20"></textarea>
             <small class="p-error" *ngIf="submitted && !game.longDescription">Długi opis jest wymagany.</small>
         </div>
 
@@ -110,23 +110,26 @@
 
         <div class="field">
             <label for="published">Rok publikacji</label>
-            <input type="text" pInputText id="published" [(ngModel)]="game.published" required autofocus />
+            <p-inputNumber id="published" [(ngModel)]="game.published" [min]="1" [max]="9999"/>
             <small class="p-error" *ngIf="submitted && !game.published">Rok publikacji jest wymagany.</small>
         </div>
         <div class="field">
             <label for="max_players">Max. Liczba Graczy</label>
-            <input type="text" pInputText id="max_players" [(ngModel)]="game.maxPlayers" required autofocus />
+            <p-inputNumber id="max_players" [(ngModel)]="game.maxPlayers" autofocus [min]="1" [max]="9999"/>
             <small class="p-error" *ngIf="submitted && !game.maxPlayers">Max liczba graczy jest wymagana.</small>
         </div>
         <div class="field">
-            <label for="age">Min. Wiek</label>
+            <!-- <label for="age">Min. Wiek</label>
             <input type="text" pInputText id="age" [(ngModel)]="game.age" required autofocus />
-            <small class="p-error" *ngIf="submitted && !game.age">Min wiek.</small>
+            <small class="p-error" *ngIf="submitted && !game.age">Min wiek.</small> -->
+            <label for="age">Min. Wiek</label>
+            <p-inputNumber id="age" [(ngModel)]="game.age" autofocus [min]="1" [max]="9999"/>
+            <small class="p-error" *ngIf="submitted && !game.age">Min wiek jest wymagany.</small>
         </div>
         <div class="formgrid grid">
             <div class="field col">
                 <label for="price">Cena</label>
-                <p-inputNumber id="price" [(ngModel)]="game.price" mode="currency" currency="PLN" locale="pl-PL"></p-inputNumber>
+                <p-inputNumber id="price" [(ngModel)]="game.price" mode="currency" currency="PLN" locale="pl-PL" />
             </div>
         </div>
     </ng-template>

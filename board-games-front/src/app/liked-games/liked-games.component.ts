@@ -45,12 +45,24 @@ export class LikedGamesComponent implements OnInit {
   }
 
   deleteSelectedLikedGame(gameId: number) {
+    const userLikedKey = `liked_game_${gameId}`;
+    sessionStorage.removeItem(userLikedKey);
+    //sessionStorage.getItem(userLikedKey) === 'false'; 
+
     this.userService.deleteLikedGame(gameId, this.userId).subscribe(
       (date: any) => {
         this.likedGame = this.likedGame.filter(lg => lg.game.id !== gameId);
       },
       (error: any) => {
         console.error('Wystąpił błąd podczas usuwania!', error);
+      }
+    );
+    this.gamesService.decrementLikes(gameId).subscribe(
+      () => {
+        // Pomyślnie zaktualizowano grę
+      },
+      (error) => {
+        console.error('Wystąpił błąd podczas usuwania lika!', error);
       }
     );
   }

@@ -17,11 +17,9 @@ import { TokenStorageService } from '../token-storage.service';
   providers: [MessageService, ConfirmationService]
 })
 export class GameDetailsComponent implements OnInit {
-  
-
   @ViewChild('dt') dt: Table | undefined;
   game: Games = {};
-  userId = this.tokenStorageService.getUserDataFromStorage().id;
+  userId: number | undefined;
   categories: Category[] = [];
   showCommentList = true;
   showUsersPanel = true;
@@ -69,7 +67,7 @@ export class GameDetailsComponent implements OnInit {
     if (this.game && this.game.id !== undefined) {
       const userLikedKey = `liked_game_${this.game.id}`;
       const userLiked = sessionStorage.getItem(userLikedKey) === 'true'; 
-
+      this.userId = this.tokenStorageService.getUserDataFromStorage().id;
       if (!userLiked) {
         this.game.likes = (this.game.likes || 0) + 1;
         sessionStorage.setItem(userLikedKey, 'true');

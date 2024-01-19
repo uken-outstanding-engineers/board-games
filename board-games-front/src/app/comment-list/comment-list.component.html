@@ -7,17 +7,16 @@
 </form>
 
 
-<div *ngFor="let user of users">
-  <div class="card" *ngIf="userHasComments(user?.id)">
+<div *ngFor="let comment of comments">
+  <div class="card" *ngIf="comment">
     <img [src]="'//ssl.gstatic.com/accounts/ui/avatar_2x.png'" [alt]="'avatar'"/>
     <div class="container">
-      <h2>{{ user.username }}</h2>
-      <div *ngFor="let comment of getUserComments(user?.id)">
+      <h2>{{ comment.user?.username }}</h2>
+      <div>
         {{ comment.comment }}
       </div>
-
-      
     </div>
   </div>
 </div>
+
 

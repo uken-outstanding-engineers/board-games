@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommentService } from '../api/comment-service';
 import { Comment } from '../api/comment';
 import { UserService } from '../api/user-service';
@@ -16,13 +16,15 @@ export class CommentListComponent implements OnInit {
   comments: Comment[] = [];
   users: User[] = [];
   newComment: string = '';
+  @Input() gameIdToComment: number | null = null;
+
 
   constructor(private commentService: CommentService, private userService: UserService, private tokenStorageService: TokenStorageService) {}
 
   ngOnInit() {
     this.actualUser = this.tokenStorageService.getUserDataFromStorage();
-
-    this.commentService.getComments().subscribe(
+    console.log(this.gameIdToComment);
+    this.commentService.getComments(this.gameIdToComment!).subscribe(
       (data: Comment[]) => {
         this.comments = data;
       },
@@ -50,21 +52,24 @@ export class CommentListComponent implements OnInit {
   }
 
   addComment(userId: number | null | undefined): void {
+    console.log(userId)
     if (userId !== null && userId !== undefined && this.newComment.trim() !== '') {
       const newCommentObj: Comment = {
         id: null,
         idUsers: userId,
         comment: this.newComment,
-        idGames: 1
+        idGames: 4,
+        //idGames: this.gameIdToComment! as number,
       };
-
+      console.log(newCommentObj);
       this.commentService.addComment(newCommentObj).subscribe(
         (data: Comment) => {
           this.comments.push(data);
           this.newComment = '';
+          console.log("dodano komentarz")
         },
         (error) => {
-          console.error('Wystąpił błąd podczas dodawania komentarza!', error);
+          console.error('Wystąpił błąd podczas dodawania komentarza!', error.error);
         }
       );
     }

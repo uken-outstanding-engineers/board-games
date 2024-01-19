@@ -79,5 +79,7 @@ public class Game {
     public String getImg() { return img;}
     public List<Comment> getComment() {return comment;}
     public void setComment(List<Comment> comment) {this.comment = comment;}
+    public void setGametype1(Integer gametype1) { this.gametype1 = gametype1;}
+    public Integer getGametype1() { return gametype1;}
 }
 

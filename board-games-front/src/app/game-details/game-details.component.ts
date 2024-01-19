@@ -19,6 +19,7 @@ import { TokenStorageService } from '../token-storage.service';
 export class GameDetailsComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
   game: Games = {};
+  gameIdToComment: number | null = null;
   userId: number | undefined;
   categories: Category[] = [];
   showCommentList = true;
@@ -41,6 +42,7 @@ export class GameDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const gameId = params['id'];
+      this.gameIdToComment = params['id'];
 
       this.gamesService.getGames().subscribe((games: Games[]) => {
         const selectedGame = games.find(game => game.id === +gameId);
@@ -113,6 +115,23 @@ export class GameDetailsComponent implements OnInit {
       console.error('Brak dostępu do identyfikatora gry.');
     }
   }
+
+  canUserLike(): boolean {
+    const userData = this.tokenStorageService.getUserDataFromStorage();
+
+    // Check if the user is logged in
+    if (userData) {
+      const userPermission = userData.permission;
+
+      // Check if the user has permission to like based on your business logic.
+      // For example, if non-logged users should not see the like button, you can do:
+      return true; // All logged-in users can like
+    }
+
+    // Return false for non-logged users
+    return false;
+  }
+
   applyFilterGlobal(event: any, stringVal: string) {
     this.dt!.filterGlobal((event.target as HTMLInputElement).value, stringVal);
   }

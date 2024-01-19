@@ -31,8 +31,6 @@ public class GameController {
 
     @PostMapping("/add")
     public Game addGame(@RequestBody Game game) {
-        System.out.println(game.getShortDescription());
-        System.out.println(game.getLongDescription());
         return gameService.saveGame(game); }
 
     @PutMapping("/edit/{id}")
@@ -47,6 +45,7 @@ public class GameController {
             existingGame.setMaxPlayers(gameDetails.getMaxPlayers());
             existingGame.setAge(gameDetails.getAge());
             existingGame.setPrice(gameDetails.getPrice());
+            existingGame.setGametype1(gameDetails.getGametype1());
             return gameService.saveGame(existingGame);
         } else {
             return null;

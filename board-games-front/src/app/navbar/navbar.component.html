@@ -6,6 +6,7 @@
         <div class="spacer"></div>
 
         <a mat-button routerLink="">Home</a>
+        <a mat-button routerLink="galeria">Galeria</a>
         <a mat-button routerLink="board-games-panel" *ngIf="permission > 1">Board Games Panel</a>
         <a mat-button routerLink="category-games-panel" *ngIf="permission > 1">Category Games Panel</a>
         <p-menubar [model]="menuItems"></p-menubar>

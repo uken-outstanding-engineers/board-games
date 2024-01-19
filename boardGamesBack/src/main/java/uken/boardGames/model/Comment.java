@@ -23,6 +23,7 @@ import java.util.List;
 public class Comment {
     @EmbeddedId
     @JsonIgnore
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     CommentKey id;
 
     @ManyToOne
@@ -41,12 +42,14 @@ public class Comment {
     public void setId(CommentKey id) {
         this.id = id;
     }
-    public Long getUserId() { return user.getId();}
-    public void setUserId(Long userId) { this.setUserId(userId);}
-    public Long getGameId() { return game.getId();}
-    public void setGameId(Long gameId) { this.setGameId(gameId);}
+    public Long getIdUsers() { return this.getIdUsers(); }
+    public void setIdUsers(Long idUsers) { this.setIdUsers(idUsers); }
+    public Long getIdGames() { return this.getIdGames(); }
+    public void setIdGames(Long idGames) { this.setIdGames(idGames); }
     public String getComment() { return comment;}
     public void setComment(String comment) { this.comment = comment;}
     public User getUser() { return user;}
     public Game getGame() {return game;}
+    public void setUser(User user) {this.user = user;}
+    public void setGame(Game game) {this.game = game;}
 }

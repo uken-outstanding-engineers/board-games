@@ -10,6 +10,7 @@ import { LikedGamesComponent } from './liked-games/liked-games.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CommentListComponent } from './comment-list/comment-list.component';
 import { PermissionGuard } from './routing-guard';
+import { GalleryComponent } from './gallery/gallery.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'category-games-panel', component: BoardCategoryPanelComponent, canActivate: [PermissionGuard] },
   { path: 'liked-games', component: LikedGamesComponent },
   { path: 'settings', component: SettingsComponent },
+  { path: 'galeria', component: GalleryComponent},
   { path: 'comment', component: CommentListComponent },
   { path: ':id', component: GameDetailsComponent},
   { path: '', component: HomeSiteComponent},

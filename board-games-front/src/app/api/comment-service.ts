@@ -17,14 +17,15 @@ export class CommentService {
     this.userId = userId;
   }
 
-  getComments(): Observable<any> {
-    return this.http.get(`${this.API_URL}/all`);
+  getComments(gameId: number): Observable<any> {
+    return this.http.get(`${this.API_URL}/game/${gameId}`);
   }
 
   addComment(comment: Comment): Observable<Comment> {
-    if (this.userId !== null) {
-      comment.idUsers = this.userId;
-    }
+    //if (this.userId !== null) {
+      //comment.idUsers = this.userId;
+    //}
+    console.log("2", comment);
     return this.http.post<Comment>(`${this.API_URL}/add`, comment);
   }
 }

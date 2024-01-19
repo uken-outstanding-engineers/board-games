@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface CommentService {
     List<Comment> getComments();
-    Comment addComment(Comment comment);
+    List<Comment> getCommentsByGameId(Long gameId);
+    void addComment(Comment comment);
+    //Comment findGameById(Long id);
 }

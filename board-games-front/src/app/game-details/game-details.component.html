@@ -23,13 +23,13 @@
         <td>{{ getCategoryName(game.gametype1 !== undefined ? game.gametype1 : 0) }}</td>
         <td>{{game.age}}</td>
         <td>{{game.likes}}</td>
-        <td>{{game.price}} $</td>
-        <td><a href='{{game.reference}}' target="_blank">{{game.reference}}</a></td>
+        <td>{{game.price}} zł</td>
+        <td><a href='{{game.reference}}' target="_blank">{{game.title}}</a></td>
       </tr>
     </table>             
   </div>
   <div class="pbutton">
-  <button pButton type="button" icon="pi pi-heart" (click)="handleLike()" severity="help"></button>
+    <button *ngIf="canUserLike()" pButton type="button" icon="pi pi-heart" (click)="handleLike()" severity="help"></button>
   </div>
   </div>
 </div>
@@ -40,17 +40,16 @@
     <p>{{game.longDescription}}</p>
   </p-tabPanel>
   <p-tabPanel header="Oceny">
-    <p>
-      <div class="comment-section">
-        <h2>Komentarze:</h2>
-        <div *ngIf="showCommentList"></div>
-        <app-comment-list></app-comment-list>
+    <div class="comment-section">
+      <h2>Komentarze:</h2>
+      <div *ngIf="showCommentList && game"> <!-- Dodano warunek game -->
+        <app-comment-list [gameIdToComment]="gameIdToComment!"></app-comment-list>
       </div>
-      
+    </div>
   </p-tabPanel>
-  <p-tabPanel header="Zdjęcia">   
+  <!-- <p-tabPanel header="Zdjęcia">   
     <div *ngIf="showGalleria"></div>
     <app-gallery></app-gallery>
-  </p-tabPanel>
+  </p-tabPanel> -->
 </p-tabView>
 </div>

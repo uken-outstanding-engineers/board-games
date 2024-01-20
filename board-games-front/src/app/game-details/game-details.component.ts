@@ -26,6 +26,7 @@ export class GameDetailsComponent implements OnInit {
   showUsersPanel = true;
   showGalleria = true;
   currentView: string = '';
+  likeClicked: boolean = false;
 
   constructor(
     private gamesService: GamesService,
@@ -73,7 +74,7 @@ export class GameDetailsComponent implements OnInit {
       if (!userLiked) {
         this.game.likes = (this.game.likes || 0) + 1;
         sessionStorage.setItem(userLikedKey, 'true');
-  
+        this.likeClicked = true;
         this.gamesService.incrementLikes(this.game.id!).subscribe(
           () => {
             // Pomyślnie zaktualizowano grę
@@ -93,7 +94,7 @@ export class GameDetailsComponent implements OnInit {
       } else {
         this.game.likes = Math.max(0, (this.game.likes || 0) - 1);
         sessionStorage.removeItem(userLikedKey);
-  
+        this.likeClicked = false;
         this.gamesService.decrementLikes(this.game.id!).subscribe(
           () => {
             // Pomyślnie zaktualizowano grę

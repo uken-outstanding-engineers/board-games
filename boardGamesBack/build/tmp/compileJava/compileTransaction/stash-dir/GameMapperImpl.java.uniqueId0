@@ -3,21 +3,19 @@ package uken.boardGames.mapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+import uken.boardGames.dto.CommentDTO;
 import uken.boardGames.dto.GameDTO;
-import uken.boardGames.dto.LikedGameDTO;
-import uken.boardGames.dto.LikedGameKeyDTO;
 import uken.boardGames.dto.UserDTO;
-import uken.boardGames.key.LikedGameKey;
+import uken.boardGames.model.Comment;
 import uken.boardGames.model.Game;
-import uken.boardGames.model.LikedGame;
 import uken.boardGames.model.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-19T15:10:49+0100",
+    date = "2024-01-19T02:05:15+0100",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.5.jar, environment: Java 17.0.6 (BellSoft)"
 )
-public class UserMapperImpl implements UserMapper {
+public class GameMapperImpl implements GameMapper {
 
     @Override
     public UserDTO userToUserDTO(User user) {
@@ -54,44 +52,30 @@ public class UserMapperImpl implements UserMapper {
     }
 
     @Override
-    public List<LikedGameDTO> likedGamesToLikedGameDTO(List<LikedGame> likedGames) {
-        if ( likedGames == null ) {
+    public List<CommentDTO> commentToCommentDTO(List<Comment> comment) {
+        if ( comment == null ) {
             return null;
         }
 
-        List<LikedGameDTO> list = new ArrayList<LikedGameDTO>( likedGames.size() );
-        for ( LikedGame likedGame : likedGames ) {
-            list.add( likedGameToLikedGameDTO( likedGame ) );
+        List<CommentDTO> list = new ArrayList<CommentDTO>( comment.size() );
+        for ( Comment comment1 : comment ) {
+            list.add( commentToCommentDTO1( comment1 ) );
         }
 
         return list;
     }
 
-    protected LikedGameKeyDTO likedGameKeyToLikedGameKeyDTO(LikedGameKey likedGameKey) {
-        if ( likedGameKey == null ) {
+    protected CommentDTO commentToCommentDTO1(Comment comment) {
+        if ( comment == null ) {
             return null;
         }
 
-        LikedGameKeyDTO likedGameKeyDTO = new LikedGameKeyDTO();
+        CommentDTO commentDTO = new CommentDTO();
 
-        likedGameKeyDTO.setUserId( likedGameKey.getUserId() );
-        likedGameKeyDTO.setGameId( likedGameKey.getGameId() );
+        commentDTO.setUser( userToUserDTO( comment.getUser() ) );
+        commentDTO.setGame( gameToGameDTO( comment.getGame() ) );
+        commentDTO.setComment( comment.getComment() );
 
-        return likedGameKeyDTO;
-    }
-
-    protected LikedGameDTO likedGameToLikedGameDTO(LikedGame likedGame) {
-        if ( likedGame == null ) {
-            return null;
-        }
-
-        LikedGameDTO likedGameDTO = new LikedGameDTO();
-
-        likedGameDTO.setUser( userToUserDTO( likedGame.getUser() ) );
-        likedGameDTO.setGame( gameToGameDTO( likedGame.getGame() ) );
-        likedGameDTO.setDate( likedGame.getDate() );
-        likedGameDTO.setId( likedGameKeyToLikedGameKeyDTO( likedGame.getId() ) );
-
-        return likedGameDTO;
+        return commentDTO;
     }
 }

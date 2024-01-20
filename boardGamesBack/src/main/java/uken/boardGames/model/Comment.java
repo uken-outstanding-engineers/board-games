@@ -42,10 +42,10 @@ public class Comment {
     public void setId(CommentKey id) {
         this.id = id;
     }
-    public Long getIdUsers() { return this.getIdUsers(); }
-    public void setIdUsers(Long idUsers) { this.setIdUsers(idUsers); }
-    public Long getIdGames() { return this.getIdGames(); }
-    public void setIdGames(Long idGames) { this.setIdGames(idGames); }
+    public Long getIdUsers() { return id.getIdUsers(); }
+    public void setIdUsers(Long idUsers) { id.setIdUsers(idUsers); }
+    public Long getIdGames() { return id.getIdGames(); }
+    public void setIdGames(Long idGames) { id.setIdGames(idGames); }
     public String getComment() { return comment;}
     public void setComment(String comment) { this.comment = comment;}
     public User getUser() { return user;}

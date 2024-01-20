@@ -1,0 +1,42 @@
+// :host ::ng-deep img, svg {
+//     vertical-align: middle;
+//     height: 50px;
+//     width: 50px;
+// }
+:host ::ng-deep .p-paginator .p-paginator-current {
+    background-color: transparent;
+    cursor: auto;
+    border: 0 none;
+    color:  #6c757d;
+    min-width: 2.357rem;
+    height: 2.357rem;
+    margin: 0 0 0 -1px;
+    margin-left: auto;
+    padding: 0 0.5rem;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background: #E3F2FD;
+    border-color: #E3F2FD;
+    color: #495057;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page,
+:host ::ng-deep .p-paginator .p-paginator-first, 
+:host ::ng-deep .p-paginator .p-paginator-prev, 
+:host ::ng-deep .p-paginator .p-paginator-next, 
+:host ::ng-deep .p-paginator .p-paginator-last {
+    background-color: transparent;
+    border: 0 none;
+    color: #6c757d;
+    min-width: 2.357rem;
+    height: 2.357rem;
+    margin: 0.143rem;
+    transition: box-shadow 0.2s;
+    border-radius: 3px;
+}
+
+:host ::ng-deep h5 {
+    font-size: 1.25rem;
+    font-weight: bold;
+}

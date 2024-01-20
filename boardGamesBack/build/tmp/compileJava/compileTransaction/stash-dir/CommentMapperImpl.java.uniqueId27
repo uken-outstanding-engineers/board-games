@@ -2,15 +2,13 @@ package uken.boardGames.mapper;
 
 import javax.annotation.processing.Generated;
 import uken.boardGames.dto.CommentDTO;
-import uken.boardGames.dto.CommentKeyDTO;
 import uken.boardGames.dto.GameDTO;
-import uken.boardGames.key.CommentKey;
 import uken.boardGames.model.Comment;
 import uken.boardGames.model.Game;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-19T15:10:49+0100",
+    date = "2024-01-19T02:05:15+0100",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.5.jar, environment: Java 17.0.6 (BellSoft)"
 )
 public class CommentMapperImpl implements CommentMapper {
@@ -25,7 +23,6 @@ public class CommentMapperImpl implements CommentMapper {
 
         commentDTO.setGame( gameToGameDTO( comment.getGame() ) );
         commentDTO.setComment( comment.getComment() );
-        commentDTO.setId( commentKeyToCommentKeyDTO( comment.getId() ) );
 
         return commentDTO;
     }
@@ -44,18 +41,5 @@ public class CommentMapperImpl implements CommentMapper {
         gameDTO.setImg( game.getImg() );
 
         return gameDTO;
-    }
-
-    protected CommentKeyDTO commentKeyToCommentKeyDTO(CommentKey commentKey) {
-        if ( commentKey == null ) {
-            return null;
-        }
-
-        CommentKeyDTO commentKeyDTO = new CommentKeyDTO();
-
-        commentKeyDTO.setIdUsers( commentKey.getIdUsers() );
-        commentKeyDTO.setIdGames( commentKey.getIdGames() );
-
-        return commentKeyDTO;
     }
 }

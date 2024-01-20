@@ -56,7 +56,7 @@ export class BoardGamesPanelComponent implements OnInit{
       }
       
 
-    applyFilterGlobal(event:any, stringVal:string) {
+    applyFilterGlobal(event: Event, stringVal: string) {
         this.dt!.filterGlobal((event.target as HTMLInputElement).value, stringVal);
     }
 
@@ -146,14 +146,12 @@ export class BoardGamesPanelComponent implements OnInit{
           }
            else { //add game
             this.game.likes = 0; 
-            console.log("Long Description: ", this.game);
             this.gamesService.addGame(this.game).subscribe(
                 (data: any) => {
                   if (this.uploadedFile) {
                     data.img = 'p' + data.id + '.' + this.uploadedFile.name.split('.').pop();
                   }
                   this.games.push(data);
-                  //console.log(data);
                   this.games = this.games.slice();
                   this.uploadGameImageFile(data.id);
                   this.messageService.add({ severity: 'success', summary: 'Operacja zakończona sukcesem', detail: 'Gra została utworzona', life: 3000 });
@@ -166,7 +164,6 @@ export class BoardGamesPanelComponent implements OnInit{
             }
 
             this.games = [...this.games]; 
-            console.log(this.games);
             this.gameDialog = false; 
             this.game = {}; 
         }

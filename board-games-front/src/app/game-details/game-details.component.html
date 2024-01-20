@@ -29,7 +29,7 @@
     </table>             
   </div>
   <div class="pbutton">
-    <button *ngIf="canUserLike()" pButton type="button" icon="pi pi-heart" (click)="handleLike()" severity="help"></button>
+    <button *ngIf="canUserLike()" pButton type="button" #heart icon="{{ likeClicked ? 'pi pi-times' : 'pi pi-heart' }}" (click)="handleLike()" severity="help"></button>
   </div>
   </div>
 </div>

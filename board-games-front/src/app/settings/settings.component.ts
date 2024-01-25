@@ -20,8 +20,8 @@ export class SettingsComponent {
   newPassword: string = "";
   reNewPassword: string = "";
 
-  check: boolean | undefined;
-  check2: boolean | undefined;
+  //check: boolean | undefined;
+  //check2: boolean | undefined;
   
   constructor(
     private tokenStorageService: TokenStorageService, 
@@ -58,7 +58,6 @@ export class SettingsComponent {
           console.error('Błąd podczas aktualizowania użytkownika:', error);
         }
       );
-      //window.location.reload(); // Zmienić na coś innego
     }
   }
 

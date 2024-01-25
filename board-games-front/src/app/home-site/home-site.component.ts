@@ -59,7 +59,7 @@ export class HomeSiteComponent implements OnInit{
       return '';
     }
 
-    applyFilterGlobal(event:any, stringVal:string) {
+    applyFilterGlobal(event: Event, stringVal:string) {
         this.dt!.filterGlobal((event.target as HTMLInputElement).value, stringVal);
     }
 }

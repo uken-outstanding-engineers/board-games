@@ -29,7 +29,6 @@ export class LikedGamesComponent implements OnInit {
       (data: any) => {
         this.likedGame = data.likedGame;
 
-        // Sortowanie likedGame po dacie
         this.likedGame.sort((a, b) => {
           if (a.date && b.date) {
             return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -47,7 +46,6 @@ export class LikedGamesComponent implements OnInit {
   deleteSelectedLikedGame(gameId: number) {
     const userLikedKey = `liked_game_${gameId}`;
     sessionStorage.removeItem(userLikedKey);
-    //sessionStorage.getItem(userLikedKey) === 'false'; 
 
     this.userService.deleteLikedGame(gameId, this.userId).subscribe(
       (date: any) => {

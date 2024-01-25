@@ -120,16 +120,11 @@ export class GameDetailsComponent implements OnInit {
   canUserLike(): boolean {
     const userData = this.tokenStorageService.getUserDataFromStorage();
 
-    // Check if the user is logged in
     if (userData) {
       const userPermission = userData.permission;
-
-      // Check if the user has permission to like based on your business logic.
-      // For example, if non-logged users should not see the like button, you can do:
-      return true; // All logged-in users can like
+      return true; 
     }
 
-    // Return false for non-logged users
     return false;
   }
 

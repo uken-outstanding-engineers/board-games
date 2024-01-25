@@ -11,6 +11,7 @@ export class GalleryComponent {
   games: Games[] = []; 
   modalOpened = false;
   selectedGame: Games | null = null;
+  
   constructor(private gamesService: GamesService) {}
 
   ngOnInit() {

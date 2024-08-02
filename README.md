@@ -136,4 +136,143 @@ Angular wspiera najnowsze przeglądarki, w tym:
     - Wprowadź dane serwera PostgreSQL, które zostały skonfigurowane podczas instalacji.
 8. **Połącz się z bazą danych**
     - Po dodaniu serwera wybierz go z listy i wprowadź hasło użytkownika postgres.
+<br><br>
+# Engineering Project SwapDice [EN]
+
+## Table of Contents
+1. [Hardware Requirements](#hardware-requirements)
+2. [Runtime Environment](#runtime-environment)
+3. [Installation Instructions](#installation-instructions)
+    - [Installing Angular 15.2.0](#installing-angular-1520)
+    - [Installing Spring Boot 3.2.1](#installing-spring-boot-321)
+    - [Installing PostgreSQL](#installing-postgresql)
+    - [Installing PgAdmin 4](#installing-pgadmin-4)
+
+## Hardware Requirements
+
+### Processor
+- Recommended: Multi-core processor with a frequency above 2.0 GHz.
+
+### RAM
+- Minimum: 8 GB.
+- Recommended: 16 GB or more.
+
+### Hard Drive
+- Free space: at least 20 GB.
+
+### Graphics Card
+- No special graphics cards are required, but those supporting OpenGL are recommended.
+
+### Operating System
+- Windows 10 - 11
+- macOS 11 (Big Sur) or newer
+- Any modern Linux distribution
+
+## Runtime Environment
+
+### Angular
+Angular supports the latest browsers, including:
+- Chrome: last two versions
+- Firefox: latest version and ESR
+- Edge: last two major versions
+- Safari: last two major versions
+- iOS: last two major versions
+- Android: last two major versions
+
+**Technical requirements for Angular (v.15.2.0):**
+- Node.js - version 20.10.0
+- NPM - version 10.2.5
+- Angular CLI - version 15.2.0
+- PrimeNG Library
+
+### Spring Boot (v.3.2.1)
+- Gradle - version 7.x (7.5 or later) and 8.x
+- Java - version 17
+- IntelliJ IDEA Community Edition - latest version
+
+### Database
+- PgAdmin 4: version 7.8 or later
+- PostgreSQL: version 16.1 or later
+
+## Installation Instructions
+
+### Installing Angular 15.2.0
+
+1. **Install Node.js**
+    - Download and install Node.js from [the official website](https://nodejs.org/). Installing Node.js includes npm.
+2. **Install Angular CLI**
+    - In the Node.js command prompt, run:
+      ```bash
+      npm install -g @angular/cli@15.2.0
+      ```
+3. **Create a new project**
+    - Create a new Angular project and navigate to its folder:
+      ```bash
+      ng new board-games-main
+      cd board-games-main
+      ```
+4. **Install PrimeNG Library**
+    - Run the following command:
+      ```bash
+      npm install primeng
+      ```
+5. **Run the project**
+    - Open the project on localhost:4200:
+      ```bash
+      ng serve --open
+      ```
+
+### Installing Spring Boot 3.2.1
+
+1. **Create a new project**
+    - Use [start.spring.io](https://start.spring.io/) to create a project. Add the appropriate dependencies, download the zip, and extract it on your computer.
+2. **Open the project in IntelliJ IDEA**
+    - Open the project in IntelliJ IDEA and add the necessary code.
+3. **Run the project**
+    - From IntelliJ IDEA or using the command line:
+      ```bash
+      ./gradlew bootRun  # MacOS/Linux
+      .\gradlew.bat bootRun  # Windows
+      ```
+
+### Installing PostgreSQL
+
+1. **Download the installer**
+    - Go to [the official PostgreSQL website](https://www.postgresql.org/download/).
+    - Choose the appropriate version for Windows (e.g., Windows x86-64).
+2. **Run the installer**
+    - After downloading, run the PostgreSQL installer.
+3. **Choose components**
+    - Select the components to install. Typically, it's advisable to install the PostgreSQL Server and developer tools.
+4. **Server settings**
+    - Set the password for the postgres user (database administrator) and the server port (default 5432).
+5. **Directory settings**
+    - Choose the directory where PostgreSQL files will be installed.
+6. **Enter password**
+    - Enter the password for the postgres user. This password will be used to connect to the database.
+7. **Installation**
+    - Continue with the installation, accepting the default options.
+8. **Finish installation**
+    - After installation, you can choose to launch Stack Builder to install additional tools and extensions.
+
+### Installing PgAdmin 4
+
+1. **Download the installer**
+    - Go to [the official PgAdmin website](https://www.pgadmin.org/download/).
+    - Download the appropriate version for Windows.
+2. **Run the installer**
+    - After downloading, run the PgAdmin installer.
+3. **Choose components**
+    - Select the components to install. It's generally recommended to install PgAdmin 4 and additional tools such as pgAgent.
+4. **Server settings**
+    - Enter the PostgreSQL server details such as IP address, port, database name, etc.
+5. **User account settings**
+    - Provide the details to create a user account for logging into PgAdmin.
+6. **Installation**
+    - Continue with the installation, accepting the default options.
+7. **Add PostgreSQL server**
+    - In PgAdmin, go to `File` then `Add Server`.
+    - Enter the PostgreSQL server details configured during installation.
+8. **Connect to the database**
+    - After adding the server, select it from the list and enter the password for the postgres user.
 

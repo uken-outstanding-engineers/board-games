@@ -117,6 +117,7 @@ export class BoardGamesPanelComponent implements OnInit{
               },
               (error: any) => {
                 console.error('Błąd podczas usuwania gry:', error);
+                this.messageService.add({ severity: 'error',summary: 'Błąd', detail: 'Nie powiodło się usuwanie gry', life: 3000 });
               }
             );
           }

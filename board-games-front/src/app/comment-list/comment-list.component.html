@@ -1,7 +1,7 @@
 <div *ngIf="showUsersPanel"></div>
 
 
-<form (ngSubmit)="addComment(actualUser.id)">
+<form *ngIf="canUserLike()" (ngSubmit)="addComment(actualUser.id)">
   <input type="text" placeholder="Dodaj komentarz" [(ngModel)]="newComment" name="newComment" required>
   <button type="submit">Dodaj</button>
 </form>

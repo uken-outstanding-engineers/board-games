@@ -65,4 +65,15 @@ export class CommentListComponent implements OnInit {
       );
     }
   }
+
+  canUserLike(): boolean {
+    const userData = this.tokenStorageService.getUserDataFromStorage();
+
+    if (userData) {
+      const userPermission = userData.permission;
+      return true; 
+    }
+
+    return false;
+  }
 }
